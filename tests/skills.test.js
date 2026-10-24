@@ -9,7 +9,8 @@ test('Sagebooks Level 1 has exactly 100 unique character lessons in five ordered
   assert.equal(sageBooks[0].items[0].label,'山');assert.equal(sageBooks[4].items[19].label,'那');
 });
 test('English includes individually tracked sounds, sight words, digraphs, trigraphs and six syllable types',()=>{
-  assert.deepEqual(englishGroups.map(x=>x.id),['sounds','sight','digraphs','trigraphs','syllables']);
+  assert.ok(['upper','lower','red','sight','digraphs','trigraphs','syllables'].every(id=>englishGroups.some(group=>group.id===id)));
+  for(const id of ['upper','lower']){const group=englishGroups.find(g=>g.id===id);assert.equal(group.items.length,52);assert.equal(group.items.filter(x=>x.letterTarget==='name').length,26);assert.equal(group.items.filter(x=>x.letterTarget==='sound').length,26);}
   assert.equal(englishGroups.find(x=>x.id==='syllables').items.length,6);
   assert.ok(englishGroups.find(x=>x.id==='trigraphs').items.some(x=>x.label==='igh'));
 });
@@ -17,7 +18,7 @@ test('math covers all 18 NEL knowledge, skill and disposition references without
   const codes=new Set(mathGroups.flatMap(g=>g.items).filter(x=>x.alignment==='Direct').map(x=>x.nel));
   for(const code of ['1.1','1.2','2.1','2.2','2.3','2.4','3.1','3.2','3.3','3.4','3.5','3.6','3.7','3.8','4.1','4.2','4.3','4.4'])assert.ok(codes.has(code));
   for(const item of mathGroups.flatMap(g=>g.items)){assert.ok(item.help.length>0&&item.observe.length>0);if(item.alignment==='Extension')assert.equal(item.nel,'No direct goal');}
-  assert.deepEqual(mathGroups.slice(0,5).map(x=>x.id),['number','algebra','geometry','measurement','data']);
+  assert.deepEqual(mathGroups.slice(0,6).map(x=>x.id),['cardinality','comparison','composition','pattern','shape','measures']);
 });
 test('skill identifiers are unique and per-child progress can be checked and unchecked',()=>{
   const skills=allBuiltInSkills();assert.equal(new Set(skills.map(x=>x.id)).size,skills.length);
@@ -30,4 +31,15 @@ test('custom sight words are bounded and have independently trackable skill reco
   assert.equal(validateChildrenChanges([{key:'custom:test-word',value:{group:'sight',label:'because'}},{key:'skill:child-a:custom-test-word',value:{covered:true,date:'2026-10-24',note:'Read together'}}]),true);
   assert.equal(validateChildrenChanges([{key:'custom:test-word',value:{group:'math',label:'because'}}]),false);
   assert.equal(validateChildrenChanges([{key:'custom:test-word',value:{group:'sight',label:' '}}]),false);
+});
+
+test('NCETM regrouping preserves previous math and lowercase sound IDs',()=>{
+  const all=allBuiltInSkills();for(const id of ['math-count20','math-compare','math-parts','math-patterns','math-shapes','math-units','math-graph','en-sound-a','en-sound-long-a'])assert.ok(all.some(x=>x.id===id));
+});
+test('secure, practice and weekly lesson flags are independent and validated',()=>{
+  const key='skill:child-a:math-parts';const value={covered:false,date:'2026-10-24',note:'Needs concrete objects',secure:false,needsPractice:true,focusWeek:'2026-10-19'};
+  assert.equal(validateChildrenChanges([{key,value}]),true);
+  assert.equal(validateChildrenChanges([{key,value:{...value,secure:'yes'}}]),false);
+  assert.equal(validateChildrenChanges([{key,value:{...value,focusWeek:'tomorrow'}}]),false);
+  assert.equal(validateChildrenChanges([{key:'custom:red-example',value:{group:'red',label:'said'}}]),true);
 });
