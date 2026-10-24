@@ -12,7 +12,7 @@ class SharedTracker {
     this.busy = false;
     try { this.pending = JSON.parse(localStorage.getItem(this.pendingKey)) || {}; } catch { this.pending = {}; }
     this.cache = (() => { try { return JSON.parse(localStorage.getItem(this.cacheKey)) || null; } catch { return null; } })();
-    if (this.cache) this.apply({ ...this.cache, ...this.pending });
+    if (this.cache || Object.keys(this.pending).length) this.apply({ ...this.cache, ...this.pending });
     this.observed = this.snapshot();
     this.status('loading');
     this.refresh();

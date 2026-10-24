@@ -38,3 +38,13 @@ test('a second initializer respects the first initialized tracker',async()=>{
   const b=device(server,{'journal:2026-10-24':'Second'});await settle();
   assert.equal(server.records['journal:2026-10-24'],'First');assert.equal(b.state()['journal:2026-10-24'],'First');
 });
+test('a child added before the first successful connection survives an offline reload',async()=>{
+  const server={initialized:true,records:{},fail:true};
+  const first=device(server);await settle();
+  first.edit('profile:child-a',{name:'Child A'});await first.tracker.flush();
+  assert.equal(first.saved.has('mll-shared-cache'),false);
+  const reloaded=device(server,{},first.saved);await settle();
+  assert.equal(reloaded.state()['profile:child-a'].name,'Child A');
+  server.fail=false;await reloaded.tracker.refresh();await settle();
+  assert.equal(server.records['profile:child-a'].name,'Child A');
+});
