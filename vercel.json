@@ -1,3 +1,10 @@
 {
-  "outputDirectory": "."
+  "$schema": "https://openapi.vercel.sh/vercel.json",
+  "buildCommand": "npm run build",
+  "outputDirectory": "dist",
+  "regions": ["sin1"],
+  "headers": [{
+    "source": "/api/(.*)",
+    "headers": [{ "key": "Cache-Control", "value": "no-store" }]
+  }]
 }
