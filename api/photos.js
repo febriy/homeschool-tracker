@@ -9,11 +9,13 @@ export async function handlePhotos(request, dependencies={}) {
     const sql = dependencies.sql || neon(process.env.DATABASE_URL);
     const storage = dependencies.storage || {put,get,del};
     if (!prepared || dependencies.sql) {
-      const ready = sql`CREATE TABLE IF NOT EXISTS children_photos (
+      const createSchema = () => sql`CREATE TABLE IF NOT EXISTS children_photos (
         id uuid PRIMARY KEY, child_id text NOT NULL, date date NOT NULL,
         subject text NOT NULL, caption text NOT NULL, pathname text NOT NULL,
         created_at timestamptz NOT NULL DEFAULT now(), deleted boolean NOT NULL DEFAULT false
       )`;
+      // Two new function instances may create the same Postgres catalog type at once.
+      const ready = createSchema().catch(error=>{if(error.code==='23505')return createSchema();throw error});
       if (!dependencies.sql) prepared=ready.catch(e=>{prepared=null;throw e});
       await ready;
     } else await prepared;
