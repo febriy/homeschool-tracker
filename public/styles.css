@@ -33,3 +33,18 @@ body{background:var(--paper)}a{color:#964017}.app{max-width:1060px}.mark{width:4
 .heading-pattern{right:7px;top:62%;width:108px;height:120px}.sunny-heading p{font-size:13px;max-width:245px}.sunny-heading time{font-size:12px}
 }
 @media(max-width:370px){.brand-name{font-size:18px}.brand .mark{width:30px;flex-basis:30px}.brand-sub{font-size:9px}.sunny-heading{padding-right:90px}.heading-pattern{right:3px;width:94px}}
+
+/* A home-and-garden watercolour journal; keep working surfaces quiet. */
+:root{--paper:#fffaf0;--card:#fffef9;--line:#dfd5be;--muted:#6e5a40;--green:#405d39;--green-soft:#eef2e4}
+.sunny-heading{background:#fff0ca;border-radius:16px;padding:32px 340px 30px 30px;min-height:240px}
+.heading-pattern{width:310px;height:210px;right:15px;opacity:1}
+.page-heading:not(.sunny-heading){display:grid;grid-template-columns:minmax(0,1fr) auto auto;align-items:center;column-gap:20px;min-height:118px}
+.page-heading:not(.sunny-heading)>div{grid-column:1;grid-row:1}.journal-art{grid-column:3;grid-row:1;width:160px;height:118px;object-fit:contain;pointer-events:none}
+.page-heading:not(.sunny-heading)>.button,.page-heading:not(.sunny-heading)>.learner-name{grid-column:2;grid-row:1}
+#ladder-view>.page-heading,#notes-view>.page-heading{border-bottom:1px solid var(--line);padding-bottom:20px}
+.bible-section{background:#fff3ce}.photo-empty>img{width:190px;height:130px;object-fit:contain}
+@media(max-width:650px){
+.sunny-heading{padding:23px 22px;min-height:270px}.sunny-heading h1{max-width:285px}.sunny-heading p{max-width:270px}.heading-pattern{width:180px;height:124px;right:3px;top:auto;bottom:0;transform:none}.sunny-heading time{margin-top:54px;max-width:150px;font-size:11px}
+.page-heading:not(.sunny-heading){grid-template-columns:minmax(0,1fr) 84px;gap:14px 10px;min-height:100px}.journal-art{grid-column:2;grid-row:1;width:88px;height:86px}.page-heading:not(.sunny-heading)>.button{grid-column:1/-1;grid-row:2;justify-self:start}.page-heading:not(.sunny-heading)>.learner-name{grid-column:1/-1;grid-row:2}.page-heading:not(.sunny-heading) h1{font-size:27px}.page-heading:not(.sunny-heading) p{font-size:13px}
+}
+@media(max-width:370px){.heading-pattern{width:160px}.sunny-heading time{font-size:10px}}

@@ -1,0 +1,8 @@
+{
+  "name": "Wonder and Worship — home and garden journal",
+  "mode": "operate",
+  "colors": {"paper":"#fffaf0","card":"#fffef9","ink":"#382716","muted":"#6e5a40","accent":"#a63f13","line":"#dfd5be","covered":"#405d39","today":"#fff0ca"},
+  "typography": {"wordmark":"Courgette","headings":"Fraunces","body":"system sans serif"},
+  "assets": ["public/watercolour-table.webp","public/watercolour-books.webp"],
+  "constraints": ["Keep artwork outside controls and record content", "Decorative images have empty alt text", "Preserve per-child learning data", "Maintain responsive forms and visible keyboard focus"]
+}
