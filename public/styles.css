@@ -78,3 +78,13 @@ nav{background:#f8efdf;border-color:#d9ccb9}nav button[aria-current=page]{backgr
 .heading-pattern{inset:auto 0 0;width:100%;height:190px;transform:none;object-fit:cover;object-position:center bottom;mask-image:linear-gradient(to bottom,transparent,#000 34%);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 34%)}
 @media(max-width:650px){.sunny-heading{min-height:304px;padding:23px 21px 135px}.sunny-heading h1{max-width:295px;font-size:28px}.sunny-heading p{max-width:295px}.sunny-heading time{margin-top:13px;font-size:11px}.heading-pattern{width:100%;height:145px;object-position:center bottom}}
 @media(min-width:651px) and (max-width:950px){.sunny-heading{min-height:328px;padding:26px 28px 180px}.sunny-heading h1{font-size:32px}.heading-pattern{height:185px}}
+
+/* Resource links read as text; the day artwork follows the date directly. */
+.resource-link{display:inline-flex;align-items:center;background:none;border:0;border-radius:0;padding:6px 0;min-height:44px;max-width:100%;white-space:normal;overflow-wrap:anywhere;line-height:1.5;text-decoration:underline;text-underline-offset:4px}
+.sunny-heading{display:flex;flex-direction:column;min-height:0;padding:26px 28px 0;gap:0}
+.sunny-heading>div{order:0}.sunny-heading time{order:1;position:relative;inset:auto;margin:12px 0 0;padding:0}
+.heading-pattern{order:2;position:relative;inset:auto;transform:none;width:calc(100% + 56px);height:auto;max-height:260px;margin:6px -28px 0;object-fit:contain;object-position:center bottom;mask-image:none;-webkit-mask-image:none}
+@media(max-width:650px){.sunny-heading{min-height:0;padding:23px 21px 0}.sunny-heading time{margin-top:12px;font-size:11px}.heading-pattern{width:calc(100% + 42px);height:auto;max-height:none;margin:6px -21px 0}.resource-link{margin-left:34px;padding:4px 0;min-height:44px}}
+@media(min-width:651px) and (max-width:950px){.sunny-heading{min-height:0;padding:24px 26px 0}.heading-pattern{width:calc(100% + 52px);margin:6px -26px 0;max-height:240px}}
+.sunny-heading .heading-pattern{margin-top:-20px}
+@media(max-width:650px){.sunny-heading .heading-pattern{margin-top:-8px}}

@@ -5,7 +5,7 @@ export const subjects = {
 };
 export const bible = [
   {id:'bible-story', title:'Kingdom of God Storybook Bible', detail:'Read the next story together.'},
-  {id:'without-doors', title:'Without Doors · Life of Jesus', detail:'Continue the curriculum’s next topic.', link:'https://www.withoutdoorscurriculum.com/curriculum/bible-study/', linkLabel:'Open curriculum'},
+  {id:'without-doors', title:'Without Doors · Life of Jesus', detail:'Continue the curriculum’s next topic.'},
   {id:'hymn', title:'It Is Well with My Soul', detail:'Listen, sing, and learn the hymn.', link:'https://open.spotify.com/track/0p6lVcx7a04LpFQ7iSSeHP', linkLabel:'Listen to the hymn'},
   {id:'scripture', title:'Scripture memory', detail:'Practise the current verse together.', link:'https://open.spotify.com/album/3TlEFiW8VqsP1ULTnKW8Yc', linkLabel:'Scripture songs'},
   {id:'catechism', title:'Catechism', detail:'Review your current question and answer.', link:'https://open.spotify.com/album/3CMRKYEy9rRmaM5upIfwYH', linkLabel:'Catechism songs'}
@@ -36,7 +36,7 @@ export const adultBible=[
   {id:'new-testament',title:'New Testament',detail:'Continue your New Testament reading.'},
   {id:'spck-atlas',title:'SPCK Bible Atlas',detail:'Explore the places connected to your reading.'},
   {id:'hymn',title:'Hymn singing',detail:'Sing and reflect on a hymn.'},
-  {id:'without-doors',title:'Without Doors · Life of Jesus',detail:'Continue the curriculum’s next topic.',link:'https://www.withoutdoorscurriculum.com/curriculum/bible-study/',linkLabel:'Open curriculum'},
+  {id:'without-doors',title:'Without Doors · Life of Jesus',detail:'Continue the curriculum’s next topic.'},
   {id:'psalms-proverbs',title:'QT programs · Books of Psalms & Proverbs',detail:'Continue your quiet-time reading.'}
 ];
 export const adultMandarin=[
