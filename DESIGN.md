@@ -2,7 +2,7 @@
 
 The parent requested bright orange, yellow, and sunflowers. The app is used to record children’s learning separately, often on a phone.
 
-Use warm cream paper, sunflower yellow for the day heading, pale saffron for family Bible activities, terracotta for actions, and leaf green for covered skills. Keep dark brown text legible against these surfaces. Fraunces is self-hosted for headings; body copy uses the device sans serif. The sunflower is a realistic botanical cutout generated for this app, repeated sparingly. Preserve natural petal contours and the transparent background.
+Use warm cream paper, sunflower yellow for the day heading, pale saffron for family Bible activities, terracotta for actions, and leaf green for covered skills. Keep dark brown text legible against these surfaces. Fraunces is self-hosted for headings; body copy uses the device sans serif. In-app flowers use circular geometry: rounded petal blooms, four-petal clusters, and concentric circles. Use a small bloom as the brand mark and a contained modular pattern at the edge of the day heading. Preserve clear space around text; avoid photographic flowers, stems, or cutouts inside the interface.
 
 Keep the selected child visible above every view. Child buttons use names and initials; colour alone never communicates ownership. Lessons, skills, and photos belong to the child explicitly selected in their forms. Existing together records remain accessible. Family Bible and loop activities remain shared.
 
@@ -12,4 +12,4 @@ Phone layouts use one-column forms and a persistent navigation bar. All controls
 
 Progress uses checkbox selections from the same subject lists as Skills. Saving a lesson records child, date, and subject; photos share that context. Review counts distinct subject days and shows an editable attendance sheet by week or month. Literary Ladder preserves the supplied CMCC worksheet data with independent per-child reading ticks. Literature offers ten optional daily book titles.
 
-The installed app icon uses a cute painted sunflower and the homeschool name “Wonder and Worship” on warm cream. Supply Apple touch, standard web app, and padded maskable icons; keep the in-app botanical flower separate. Emily Dickinson is the poet in the Beauty loop, with poet-specific and children’s archive resource links.
+The installed app icon uses a cute painted sunflower and the homeschool name “Wonder and Worship” on warm cream. Supply Apple touch, standard web app, and padded maskable icons; keep this installed icon separate from the in-app circular floral patterns. Emily Dickinson is the poet in the Beauty loop, with poet-specific and children’s archive resource links.
