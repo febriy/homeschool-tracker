@@ -18,16 +18,16 @@
 </head>
 <body>
   <div class="app">
-    <header><div class="brand"><img class="mark" src="/meadow-sprig.webp" alt="" width="48" height="48"><div><div class="brand-name">Wonder and Worship</div><div class="brand-sub" id="brand-sub">Yeo family · Children’s learning</div></div></div><div class="lang-switch" aria-label="Language"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="zh" aria-pressed="false">中文</button></div></header>
+    <header><div class="brand"><img class="mark" src="/meadow-sprig.webp" alt="" width="48" height="48"><div><div class="brand-name">Wonder and Worship</div><div class="brand-sub" id="brand-sub">Yeo family · Learning together</div></div></div><div class="lang-switch" aria-label="Language"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="zh" aria-pressed="false">中文</button></div></header>
     <div class="shared-bar"><div><span id="sync-status" role="status" aria-live="polite">Connecting to shared tracker…</span><span class="shared-detail" id="shared-detail">One shared tracker · no sign-in needed</span></div><button id="sync-retry" class="button secondary" hidden>Retry save</button></div>
-    <section class="learner-bar" aria-label="Children’s trackers">
-      <div class="learner-top"><span id="learner-label">Who’s learning today?</span><button class="text-button" id="manage-children" aria-expanded="false" aria-controls="child-details">Manage children</button></div>
-      <div id="child-tabs" class="child-tabs" role="group" aria-label="Choose a child"></div>
+    <section class="learner-bar" aria-label="Learners’ trackers">
+      <div class="learner-top"><span id="learner-label">Who’s learning today?</span><button class="text-button" id="manage-children" aria-expanded="false" aria-controls="child-details">Manage learners</button></div>
+      <div id="child-tabs" class="child-tabs" role="group" aria-label="Choose a learner"></div>
       <select id="active-child" aria-label="Recording for" hidden></select>
       <p id="learner-hint" class="field-hint"></p>
       <details id="child-details"><summary id="add-child-label">Add a child</summary>
         <div id="rename-children"></div>
-        <form id="child-form"><label for="child-name" id="child-name-label">Child’s name</label><div class="inline"><input id="child-name" maxlength="80" required autocomplete="off" placeholder="e.g. your child’s first name"><button class="button" id="add-child-submit">Add child</button></div></form>
+        <form id="child-form"><label for="child-name" id="child-name-label">Learner’s name</label><div class="inline"><input id="child-name" maxlength="80" required autocomplete="off" placeholder="e.g. your child’s first name"><button class="button" id="add-child-submit">Add child</button></div></form>
       </details>
     </section>
     <main id="main" tabindex="-1">
@@ -35,7 +35,7 @@
       <section id="plan-view" class="view"><div class="page-heading"><img class="journal-art" src="/meadow-sprig.webp" alt="" width="800" height="533" loading="lazy"><div><h1 id="plan-heading">Their study plan.</h1><p id="plan-intro">Your children’s curriculum, gathered in one place.</p></div></div><div id="plan-content"></div></section>
       <section id="progress-view" class="view"><div class="page-heading"><img class="journal-art" src="/meadow-sprig.webp" alt="" width="800" height="533" loading="lazy"><div><h1>A little progress, every day.</h1><p>Tick what you covered. Keep a photo. See their learning grow.</p></div><button class="button" id="new-entry">Record lesson</button></div>
         <section id="record-panel" class="record-panel" hidden aria-labelledby="record-heading"><h2 id="record-heading">Record a lesson</h2><form id="record-form"><div class="form-grid">
-          <div class="field"><label for="entry-child">Child</label><select id="entry-child" required></select></div>
+          <div class="field"><label for="entry-child" id="entry-child-label">Learner</label><select id="entry-child" required></select></div>
           <div class="field"><label for="entry-subject">Subject</label><select id="entry-subject"></select></div>
           <div class="field"><label for="entry-date">Date</label><input type="date" id="entry-date" required></div>
           <div class="field"><label for="entry-outcome">Outcome</label><select id="entry-outcome"><option value="completed">Completed</option><option value="practised">Practised</option><option value="revisit">Revisit</option></select></div>
@@ -44,7 +44,7 @@
         <div class="field"><label for="entry-note">What did you notice? (optional)</label><textarea id="entry-note" maxlength="4000" rows="2"></textarea></div>
         <div class="field progress-upload"><label for="progress-photo">Photos of this lesson (optional)</label><input id="progress-photo" type="file" accept="image/jpeg,image/png,image/webp" multiple><p class="field-hint">Up to 10 photos. These also appear in Photos under the same child, date, and subject.</p><div id="progress-previews" class="photo-previews"></div><p class="field-hint">Everyone who can open this shared tracker can view its photos.</p></div>
         <p id="entry-status" role="status" aria-live="polite"></p><div class="form-actions"><button type="button" class="button secondary" id="cancel-entry">Cancel</button><button class="button" id="save-entry">Save progress</button></div></form></section>
-        <div class="filters"><div class="field"><label for="filter-child">Child</label><select id="filter-child"></select></div><div class="field"><label for="filter-subject">Subject</label><select id="filter-subject"></select></div></div><div id="record-summary" class="record-summary"></div><div id="record-list"></div>
+        <div class="filters"><div class="field"><label for="filter-child" id="filter-child-label">Learner</label><select id="filter-child"></select></div><div class="field"><label for="filter-subject">Subject</label><select id="filter-subject"></select></div></div><div id="record-summary" class="record-summary"></div><div id="record-list"></div>
       </section>
       <section id="review-view" class="view"><div class="page-heading"><img class="journal-art" src="/meadow-sprig.webp" alt="" width="800" height="533" loading="lazy"><div><h1>Look at what we’ve learned.</h1><p id="review-child"></p></div></div>
         <div class="review-controls"><div class="loop-tabs" role="group" aria-label="Review period"><button data-period="week" aria-pressed="true">Week</button><button data-period="month" aria-pressed="false">Month</button></div><div class="field"><label for="review-date">A date in this period</label><input id="review-date" type="date" required></div></div>

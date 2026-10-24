@@ -30,4 +30,33 @@ export function singaporeDay(){return new Intl.DateTimeFormat('en-CA',{timeZone:
 export function progressEntries(records,{child='all',subject='all'}={}){
   return Object.entries(records).filter(([key,value])=>key.startsWith('entry:')&&value&& (child==='all'||value.childId===child)&&(subject==='all'||value.subject===subject)).map(([key,value])=>({id:key.slice(6),...value})).sort((a,b)=>b.date.localeCompare(a.date)||b.createdAt.localeCompare(a.createdAt));
 }
-export function defaultRecords(){return {'profile:together':{name:'Children together'},rotation:'beauty'}};
+export function defaultRecords(){return {'profile:together':{name:'Children together'},'profile:parent':{name:'My learning'},rotation:'beauty'}};
+
+export const adultBible=[
+  {id:'new-testament',title:'New Testament',detail:'Continue your New Testament reading.'},
+  {id:'spck-atlas',title:'SPCK Bible Atlas',detail:'Explore the places connected to your reading.'},
+  {id:'hymn',title:'Hymn singing',detail:'Sing and reflect on a hymn.'},
+  {id:'without-doors',title:'Without Doors · Life of Jesus',detail:'Continue the curriculum’s next topic.',link:'https://www.withoutdoorscurriculum.com/curriculum/bible-study/',linkLabel:'Open curriculum'},
+  {id:'psalms-proverbs',title:'QT programs · Books of Psalms & Proverbs',detail:'Continue your quiet-time reading.'}
+];
+export const adultMandarin=[
+  {id:'podcast',title:'Listen to a podcast',detail:'Spend time listening in Mandarin.'},
+  {id:'zaobao',title:'Read 联合早报 · one article',detail:'Read one article and notice useful expressions.'},
+  {id:'preply',title:'Revise Preply vocabulary',detail:'Review and practise your lesson vocabulary.'}
+];
+export const adultLoops={
+  beauty:{title:'Beauty loop',description:'Make room to look, listen, and practise.',items:[
+    {id:'artist',title:'Artist · Anna Archer',detail:'Continue your artist study.'},
+    {...loops.beauty.items[1]}, {id:'poet',title:'Poet · Emily Dickinson',detail:'Read a poem and enjoy its sounds and images.',link:'https://poetryarchive.org/poet/emily-dickinson/',linkLabel:'Emily Dickinson poems'},
+    {id:'drawing',title:'Drawing',detail:'Continue your drawing practice.'},
+    {id:'piano',title:'Piano practice',detail:'Spend time at the piano.'}
+  ]},
+  literature:{title:'Literature',description:'Continue your own reading.',items:[
+    {id:'northanger',title:'Northanger Abbey',detail:'Continue from your last reading.'},
+    {id:'austen-bookshelf',title:'Jane Austen’s Bookshelf',detail:'Continue from your last reading.'}
+  ]},
+  history:{title:'History',description:'Connect your BiblioPlan study with country reading.',items:[{id:'biblioplan',title:'BiblioPlan',detail:'Continue the next history study.'}]}
+};
+export const isAdult=id=>id==='parent';
+export function learnerCurriculum(id){return isAdult(id)?{bible:adultBible,subjects:{mandarin:{title:'Mandarin',curriculum:'Podcasts · 联合早报 · Preply'}},loops:adultLoops}:{bible,subjects,loops}}
+export const activityIds=[...new Set([...bible,...Object.values(loops).flatMap(x=>x.items),...adultBible,...adultMandarin,...Object.values(adultLoops).flatMap(x=>x.items)].map(x=>x.id))];

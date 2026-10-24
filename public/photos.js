@@ -1,4 +1,4 @@
-import { learningSubjects } from './learning-data.js';
+import { learningSubjects,learnerSubjects } from './learning-data.js';
 export function setupPhotos({getChild,childName,t,esc,announce,singaporeDay,dateLabel,onChange=()=>{}}) {
   const $=id=>document.getElementById(id);
   let photos=[],loaded=false,loading=false,uploading=false,previewURLs=[],completed=new Set(),uploadIds=new Map(),failed=false;
@@ -6,7 +6,7 @@ export function setupPhotos({getChild,childName,t,esc,announce,singaporeDay,date
     'photos-heading':['Little moments, growing minds.','小小瞬间，慢慢成长。'],
     'photos-intro':['Keep the drawing, the discovery, and the proud smile.','保存画作、发现，和自豪的笑容。'],
     'new-photo':['Add photos','添加照片'],'photo-form-heading':['Save a learning moment','保存学习瞬间'],
-    'photo-child-label':['Child','孩子'],'photo-date-label':['Date','日期'],'photo-subject-label':['Subject','学科'],
+    'photo-child-label':['Learner','学习者'],'photo-date-label':['Date','日期'],'photo-subject-label':['Subject','学科'],
     'photo-caption-label':['A few words (optional)','写几句话（可选）'],'photo-pick-label':['Choose photos','选择照片'],
     'photo-pick-hint':['JPEG, PNG or WebP · up to 10 at a time','JPEG、PNG 或 WebP · 每次最多 10 张'],
     'photo-sharing':['Shared with everyone who can open this tracker. Photos are resized before uploading.','可打开此记录的人都能查看。照片上传前会自动缩小。'],
@@ -16,6 +16,8 @@ export function setupPhotos({getChild,childName,t,esc,announce,singaporeDay,date
   const chinese=()=>document.documentElement.lang.startsWith('zh');
   const say=(en,zh)=>chinese()?zh:en;
   function render(){
+    for(const id of ['photo-subject','photo-filter-subject']){const el=$(id);if(!el)continue;const selected=el.value,hasAll=[...el.options].some(o=>o.value==='all');el.innerHTML=(hasAll?'<option value="all">All subjects</option>':'')+Object.entries(learnerSubjects(id==='photo-subject'?$('photo-child').value||getChild():getChild())).map(([key,title])=>`<option value="${key}">${esc(t(title))}</option>`).join('');el.value=[...el.options].some(o=>o.value===selected)?selected:hasAll?'all':Object.keys(learnerSubjects(getChild()))[0]}
+
     for(const [id,words] of Object.entries(copy))if(!uploading||id!=='save-photo')$(id).textContent=words[chinese()?1:0];
     const removed=$('show-removed').checked,child=getChild();
     const subjectFilter=$('photo-filter-subject').value||'all',groupBy=$('photo-group-by').value;
@@ -38,7 +40,7 @@ export function setupPhotos({getChild,childName,t,esc,announce,singaporeDay,date
   function open(){
     $('photo-panel').hidden=false;$('new-photo').hidden=true;
     if(!$('photo-file').files.length){$('photo-child').value=getChild();$('photo-date').value=singaporeDay();$('photo-status').textContent=''}
-    $('photo-date').max=singaporeDay();$('photo-panel').scrollIntoView({block:'start',behavior:'instant'});$('photo-child').focus({preventScroll:true});
+    render();$('photo-date').max=singaporeDay();$('photo-panel').scrollIntoView({block:'start',behavior:'instant'});$('photo-child').focus({preventScroll:true});
   }
   $('new-photo').addEventListener('click',open);
   $('photo-gallery').addEventListener('click',async event=>{
@@ -48,7 +50,7 @@ export function setupPhotos({getChild,childName,t,esc,announce,singaporeDay,date
     try{const response=await fetch('/api/photos',{method:'PATCH',headers:{'Content-Type':'application/json'},body:JSON.stringify({id:button.dataset.photoId,deleted:button.dataset.photoDeleted==='true'})});if(!response.ok)throw Error();await refresh();announce(say('Photo journal updated. Restore removed photos from Recently removed.','照片日记已更新。可在“已移除的照片”中恢复。'))}catch{announce(say('Couldn’t update this photo. Please retry.','无法更新照片，请重试。'));button.disabled=false}
   });
   $('show-removed').addEventListener('change',render);$('retry-photos').addEventListener('click',refresh);
-  $('photo-file').addEventListener('change',preview);
+  $('photo-file').addEventListener('change',preview);$('photo-child').addEventListener('change',render);
   // Changing the record context makes an intentional second upload distinct from a retry.
   for(const id of ['photo-child','photo-date','photo-subject','photo-caption'])$(id).addEventListener('change',()=>{completed.clear();uploadIds.clear()});
   $('cancel-photo').addEventListener('click',()=>{if(uploading)return;$('photo-panel').hidden=true;$('new-photo').hidden=false;$('photo-form').reset();releasePreviews();$('photo-previews').innerHTML='';completed.clear();$('new-photo').focus()});
