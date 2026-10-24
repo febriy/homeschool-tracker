@@ -3,8 +3,8 @@ import assert from 'node:assert/strict';
 import vm from 'node:vm';
 import {readFileSync} from 'node:fs';
 const source=readFileSync(new URL('../sync.js',import.meta.url),'utf8');
-function device(server,initial={}){
-  const saved=new Map();let state=structuredClone(initial),status;
+function device(server,initial={},saved=new Map()){
+  let state=structuredClone(initial),status;
   const context={window:{addEventListener(){}},document:{hidden:false,activeElement:null,addEventListener(){}},navigator:{onLine:true},localStorage:{getItem:k=>saved.get(k)||null,setItem:(k,v)=>saved.set(k,v)},setInterval(){},setTimeout(){},clearTimeout(){},AbortSignal,JSON,Object,Set,structuredClone,fetch:async(url,options)=>({ok:true,json:async()=>{
     const body=options.body&&JSON.parse(options.body);
     if(server.fail)throw new Error('offline');
@@ -29,8 +29,9 @@ test('failed saves remain queued across reloads and recover without losing edits
   const server={initialized:true,records:{'journal:2026-10-24':''}};const a=device(server);await settle();
   server.fail=true;a.edit('journal:2026-10-24','Offline note');await a.tracker.flush();
   assert.equal(a.status(),'error');assert.match(a.saved.get('mll-pending-v1'),/Offline note/);
-  server.fail=false;await a.tracker.flush();
-  assert.equal(server.records['journal:2026-10-24'],'Offline note');assert.equal(a.saved.get('mll-pending-v1'),'{}');assert.equal(a.status(),'saved');
+  server.fail=false;const reloaded=device(server,{},a.saved);await settle();
+  assert.equal(reloaded.status(),'saved');
+  assert.equal(server.records['journal:2026-10-24'],'Offline note');assert.equal(a.saved.get('mll-pending-v1'),'{}');assert.equal(reloaded.status(),'saved');
 });
 test('a second initializer respects the first initialized tracker',async()=>{
   const server={initialized:false,records:{}};const a=device(server,{'journal:2026-10-24':'First'});await settle();
