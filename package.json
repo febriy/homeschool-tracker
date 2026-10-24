@@ -7,6 +7,14 @@
     "test": "node --test",
     "dev": "node scripts/dev.mjs"
   },
-  "engines": { "node": "22.x" },
-  "dependencies": { "@neondatabase/serverless": "^1.0.2" }
+  "engines": {
+    "node": "22.x"
+  },
+  "dependencies": {
+    "@neondatabase/serverless": "^1.0.2",
+    "@vercel/blob": "^2.8.2"
+  },
+  "overrides": {
+    "zod": "^4.6.6"
+  }
 }
