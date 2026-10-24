@@ -3,7 +3,7 @@ import { setupSkills } from './skills.js';
 import { subjects,bible,loops,singaporeDay,progressEntries,defaultRecords } from './curriculum.js';
 const $=id=>document.getElementById(id);
 const esc=s=>String(s??'').replace(/[&<>"']/g,c=>({'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[c]));
-let skillUI,photoUI;
+let skillUI,photoUI,awaitingRecords=true,filtersReady=false;
 let records=defaultRecords(),sync=null,editing=null,view='today',lang=localStorage.getItem('children-language')||'en',activeChild=localStorage.getItem('children-active-child')||'together',saveState='loading';
 const zh={
   'Yeo family · Children’s learning':'Yeo 家庭 · 孩子们的学习','One shared tracker · no sign-in needed':'共享学习记录 · 无需登录','Recording for':'记录对象','Add a child':'添加孩子','Add child':'添加孩子','Child’s name':'孩子的名字','Children together':'孩子们一起',
@@ -26,15 +26,15 @@ function put(key,value){records[key]=value;sync?.changed()}
 function selectOptions(id,allLabel){const el=$(id),previous=el.value;el.innerHTML=(allLabel?`<option value="all">${esc(t(allLabel))}</option>`:'')+profiles().map(p=>`<option value="${esc(p.id)}">${esc(t(p.name))}</option>`).join('');if([...el.options].some(x=>x.value===previous))el.value=previous}
 function renderProfiles(){
   const children=profiles().filter(p=>p.id!=='together');
-  if(!records['profile:'+activeChild])activeChild=children[0]?.id||'together';
+  if(!records['profile:'+activeChild]&&!awaitingRecords)activeChild=children[0]?.id||'together';
   for(const id of ['active-child','entry-child','photo-child'])selectOptions(id);
-  selectOptions('filter-child','All children');$('active-child').value=activeChild;
+  selectOptions('filter-child','All children');if(!awaitingRecords&&!filtersReady){$('filter-child').value=activeChild;filtersReady=true}$('active-child').value=activeChild;
   $('child-tabs').innerHTML=children.map((p,i)=>`<button data-child="${esc(p.id)}" aria-pressed="${p.id===activeChild}"><span class="child-initial tone-${i%3}">${esc(p.name.slice(0,1).toUpperCase())}</span><span>${esc(p.name)}</span></button>`).join('')+`<button class="together-tab" data-child="together" aria-pressed="${activeChild==='together'}">${esc(t('Children together'))}</button><button class="add-child-tab" data-add-child>${esc(t('+ Add child'))}</button>`;
   $('learner-hint').textContent=children.length ? (activeChild==='together'?t('Together records stay separate from each child’s progress.'):childName(activeChild)+' · '+t('Separate lessons, skill checklists, and photos.')):t('Add each child to start their own lessons, checklists, and photo journal.');
   $('rename-children').innerHTML=children.map(p=>`<form data-rename="${esc(p.id)}" class="rename-child"><label for="rename-${esc(p.id)}">${esc(t('Child’s name'))}</label><div class="inline"><input id="rename-${esc(p.id)}" value="${esc(p.name)}" maxlength="80" required aria-label="${esc(t('Rename')+' '+p.name)}"><button class="button secondary">${esc(t('Save name'))}</button></div></form>`).join('');
   $('manage-children').textContent=t('Manage children');$('manage-children').setAttribute('aria-expanded',String($('child-details').open));
 }
-function chooseChild(id){activeChild=id;localStorage.setItem('children-active-child',id);renderProfiles();$('entry-child').value=id;$('photo-child').value=id;$('filter-child').value=id;renderCore();renderRecords();skillUI?.render();photoUI?.render()}
+function chooseChild(id){activeChild=id;localStorage.setItem('children-active-child',id);renderProfiles();if($('record-panel').hidden)$('entry-child').value=id;if($('photo-panel').hidden)$('photo-child').value=id;$('filter-child').value=id;renderCore();renderRecords();skillUI?.render();photoUI?.render()}
 
 function checkRow(item){const checked=records['check:'+singaporeDay()+':'+item.id]===true;return `<div class="study-row ${checked?'checked':''}"><label class="study-check"><input type="checkbox" data-check="${item.id}" ${checked?'checked':''}><span><strong>${esc(t(item.title))}</strong><small>${esc(t(item.detail))}</small></span></label>${item.link?`<a class="resource-link" href="${esc(item.link)}" target="_blank" rel="noopener noreferrer">${esc(t(item.linkLabel))}</a>`:''}</div>`}
 function renderBible(){$('bible-list').innerHTML=bible.map(checkRow).join('');const n=bible.filter(x=>records['check:'+singaporeDay()+':'+x.id]).length;$('bible-progress').textContent=lang==='zh'?`${n} / ${bible.length} 项`:`${n} of ${bible.length} today`}
@@ -66,5 +66,5 @@ $('sync-retry').addEventListener('click',()=>sync.refresh());
 skillUI=setupSkills({getRecords:()=>records,put,getChild:()=>activeChild,childName,t,esc});
 photoUI=setupPhotos({profiles,getChild:()=>activeChild,childName,t,esc,announce,singaporeDay,dateLabel});
 render();
-sync=new SharedTracker({endpoint:'/api/children',storagePrefix:'children-v1',snapshot:()=>structuredClone(records),apply:incoming=>{records={...defaultRecords(),...incoming};render()},status});
+sync=new SharedTracker({endpoint:'/api/children',storagePrefix:'children-v1',snapshot:()=>structuredClone(records),apply:incoming=>{awaitingRecords=false;records={...defaultRecords(),...incoming};render()},status});
 document.addEventListener('focusout',event=>{if(event.target.matches('input,textarea,select'))setTimeout(()=>sync.refresh(),0)});
