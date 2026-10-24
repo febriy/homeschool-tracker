@@ -1,14 +1,17 @@
 /* Shared record sync. Preferences remain local; pending edits survive a reload. */
 class SharedTracker {
-  constructor({ snapshot, apply, status }) {
+  constructor({ snapshot, apply, status, endpoint = '/api/progress', storagePrefix = 'mll' }) {
+    this.endpoint = endpoint;
+    this.pendingKey = storagePrefix + '-pending-v1';
+    this.cacheKey = storagePrefix + '-shared-cache';
     this.snapshot = snapshot;
     this.apply = apply;
     this.status = status;
     this.records = {};
     this.ready = false;
     this.busy = false;
-    try { this.pending = JSON.parse(localStorage.getItem('mll-pending-v1')) || {}; } catch { this.pending = {}; }
-    this.cache = (() => { try { return JSON.parse(localStorage.getItem('mll-shared-cache')) || null; } catch { return null; } })();
+    try { this.pending = JSON.parse(localStorage.getItem(this.pendingKey)) || {}; } catch { this.pending = {}; }
+    this.cache = (() => { try { return JSON.parse(localStorage.getItem(this.cacheKey)) || null; } catch { return null; } })();
     if (this.cache) this.apply({ ...this.cache, ...this.pending });
     this.observed = this.snapshot();
     this.status('loading');
@@ -19,7 +22,7 @@ class SharedTracker {
     document.addEventListener('visibilitychange', () => { if (!document.hidden) this.refresh(); });
     window.addEventListener('beforeunload', e => { if (Object.keys(this.pending).length) { e.preventDefault(); e.returnValue = ''; } });
   }
-  remember() { localStorage.setItem('mll-pending-v1', JSON.stringify(this.pending)); }
+  remember() { localStorage.setItem(this.pendingKey, JSON.stringify(this.pending)); }
   changed() {
     const next = this.snapshot();
     for (const key of new Set([...Object.keys(this.observed), ...Object.keys(next)])) {
@@ -33,7 +36,7 @@ class SharedTracker {
     this.timer = setTimeout(() => this.flush(), 650);
   }
   async request(body) {
-    const response = await fetch('/api/progress', {
+    const response = await fetch(this.endpoint, {
       method: body ? 'POST' : 'GET', cache: 'no-store',
       headers: body ? { 'Content-Type': 'application/json' } : {},
       body: body ? JSON.stringify(body) : undefined,
@@ -44,9 +47,9 @@ class SharedTracker {
   }
   accept(records) {
     this.records = records;
-    localStorage.setItem('mll-shared-cache', JSON.stringify(records));
+    localStorage.setItem(this.cacheKey, JSON.stringify(records));
     // Never replace text under the cursor. Reconcile after the user leaves the field.
-    if (!document.activeElement?.matches('textarea,input[type="text"]')) {
+    if (!document.activeElement?.matches('textarea,input,select')) {
       this.apply({ ...records, ...this.pending });
       this.observed = this.snapshot();
     }
