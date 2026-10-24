@@ -14,6 +14,7 @@ export const loops = {
   beauty:{ title:'Beauty loop', description:'Choose a study to enjoy together.', items:[
     {id:'artist',title:'Artist · Beatrix Potter',detail:'Look closely at an illustration or painting.'},
     {id:'composer',title:'Composer · George Frideric Handel',detail:'Listen to the composer study.',link:'https://open.spotify.com/playlist/5Y08mRKOo0bBGt1u4lSERW',linkLabel:'Composer playlist'},
+    {id:'poet',title:'Poet · Emily Dickinson',detail:'Read a poem aloud together and enjoy its sounds and images.',link:'https://poetryarchive.org/poet/emily-dickinson/',linkLabel:'Emily Dickinson poems',extraLink:'https://childrens.poetryarchive.org/explore/',extraLinkLabel:'Explore children’s poetry'},
     {id:'drawing',title:'Drawing',detail:'Continue your drawing lesson or sketch together.'},
     {id:'handicraft',title:'Handicraft · My First Piano Adventures Book A',detail:'Continue the next activity or piano lesson.'}
   ]},

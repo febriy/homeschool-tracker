@@ -35,3 +35,12 @@ test('provided Literary Ladder retains all seven rungs and daily music uses dire
   assert.equal(ladderBooks[0].title,"Tomie DePaola's Favorite Nursery Tales");assert.equal(new Set(ladderBooks.map(b=>b.id)).size,852);
   for(const item of [...bible,...loops.beauty.items].filter(item=>item.link?.includes('spotify.com')))assert.match(item.link,/spotify\.com\/(track|album|playlist)\/[a-zA-Z0-9]+$/);
 });
+test('Emily Dickinson poetry is saved and included in each child’s Beauty coverage',()=>{
+  const change={key:'activity:child-a:2026-10-24:poet',value:true};
+  assert.equal(validateChildrenChanges([change]),true);
+  assert.equal(validateChildrenChanges([{key:'check:2026-10-24:poet',value:true}]),true);
+  assert.equal(validateChildrenChanges([{key:'session:poetry',value:session('child-a','2026-10-24','beauty',['activity-poet'])}]),true);
+  const records={[change.key]:true},days=periodDays('2026-10-24');
+  assert.equal(reviewLearning(records,'child-a',days).subjects.beauty.days,1);
+  assert.equal(reviewLearning(records,'child-b',days).subjects.beauty.days,0);
+});

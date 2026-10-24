@@ -4,7 +4,7 @@ export function checklistGroups(subject,records={}){
   if(subject==='mandarin')return sageBooks;
   if(subject==='math')return mathGroups;
   if(subject==='english')return englishGroups.map(group=>({...group,items:[...group.items,...Object.entries(records).filter(([key,value])=>key.startsWith('custom:')&&value?.group===group.id).map(([key,value])=>({id:'custom-'+key.slice(7),label:value.label,help:'Your own word.'}))]}));
-  const activities={bible:[['bible-story','Kingdom of God Storybook Bible'],['without-doors','Without Doors · Life of Jesus'],['hymn','It Is Well with My Soul'],['scripture','Scripture memory'],['catechism','Catechism']],beauty:[['artist','Beatrix Potter'],['composer','George Frideric Handel'],['drawing','Drawing'],['handicraft','My First Piano Adventures Book A']],literature:[['literature','Read aloud']],history:[['biblioplan','BiblioPlan']],geography:[['atlas','Student Bible Atlas']],nature:[['nature','Natural philosophy']],other:[['other','Life & learning']]};
+  const activities={bible:[['bible-story','Kingdom of God Storybook Bible'],['without-doors','Without Doors · Life of Jesus'],['hymn','It Is Well with My Soul'],['scripture','Scripture memory'],['catechism','Catechism']],beauty:[['artist','Beatrix Potter'],['composer','George Frideric Handel'],['poet','Emily Dickinson'],['drawing','Drawing'],['handicraft','My First Piano Adventures Book A']],literature:[['literature','Read aloud']],history:[['biblioplan','BiblioPlan']],geography:[['atlas','Student Bible Atlas']],nature:[['nature','Natural philosophy']],other:[['other','Life & learning']]};
   return [{id:subject,title:learningSubjects[subject],items:(activities[subject]||[]).map(([id,label])=>({id:'activity-'+id,label}))}];
 }
 export function skillLabel(id,records={}){for(const subject of Object.keys(learningSubjects)){for(const group of checklistGroups(subject,records)){const item=group.items.find(x=>x.id===id);if(item)return subject==='mandarin'?`${group.title} · ${item.simplified||item.label}`:group.letters?`${item.label} · ${item.letterTarget}`:item.label}}return id}
@@ -14,7 +14,7 @@ export function periodDays(date,period='week'){
   const end=new Date(start);if(period==='month')end.setUTCMonth(end.getUTCMonth()+1);else end.setUTCDate(end.getUTCDate()+7);
   const days=[];for(const d=new Date(start);d<end;d.setUTCDate(d.getUTCDate()+1))days.push(d.toISOString().slice(0,10));return days;
 }
-const activitySubject={ 'bible-story':'bible','without-doors':'bible',hymn:'bible',scripture:'bible',catechism:'bible',artist:'beauty',composer:'beauty',drawing:'beauty',handicraft:'beauty',literature:'literature',biblioplan:'history',atlas:'geography'};
+const activitySubject={ 'bible-story':'bible','without-doors':'bible',hymn:'bible',scripture:'bible',catechism:'bible',artist:'beauty',composer:'beauty',poet:'beauty',drawing:'beauty',handicraft:'beauty',literature:'literature',biblioplan:'history',atlas:'geography'};
 export function reviewLearning(records,child,days,photos=[]){
   const calendar=Object.fromEntries(days.map(day=>[day,{subjects:{},details:[],photos:[]}])) ;
   function add(date,subject,id,detail){if(!calendar[date]||!learningSubjects[subject])return;const cell=calendar[date];const ids=cell.subjects[subject]??=new Set();if(id.startsWith('session:')||id.startsWith('entry:'))for(const previous of ids)if(previous.startsWith('coverage:')||previous.startsWith('checklist-'))ids.delete(previous);ids.add(id);if(detail)cell.details.push({subject,text:detail})}

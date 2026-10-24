@@ -8,7 +8,7 @@ test('children’s plan contains the supplied daily curricula and three loops',(
   assert.equal(subjects.mandarin.curriculum,'Sagebooks');
   assert.equal(subjects.math.curriculum,'Kate Snow · Math with Confidence');
   assert.equal(bible.length,5);
-  assert.equal(loops.beauty.items.length,4);
+  assert.equal(loops.beauty.items.length,5);
   assert.equal(loops.literature.items[0].title,'Literary Ladder');
   assert.deepEqual(loops.history.items.map(x=>x.title),['BiblioPlan','Student Bible Atlas']);
   assert.ok(!JSON.stringify({subjects,loops,bible}).includes('Zaobao'));

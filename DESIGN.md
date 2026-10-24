@@ -11,3 +11,5 @@ Photos have dates, subjects, and optional captions. Resize uploads in the browse
 Phone layouts use one-column forms and a persistent navigation bar. All controls need visible keyboard focus, 44px touch targets, and reduced-motion support. Avoid adding decorative cards around every row.
 
 Progress uses checkbox selections from the same subject lists as Skills. Saving a lesson records child, date, and subject; photos share that context. Review counts distinct subject days and shows an editable attendance sheet by week or month. Literary Ladder preserves the supplied CMCC worksheet data with independent per-child reading ticks. Literature offers ten optional daily book titles.
+
+The installed app icon uses a cute painted sunflower and the homeschool name “Wonder and Worship” on warm cream. Supply Apple touch, standard web app, and padded maskable icons; keep the in-app botanical flower separate. Emily Dickinson is the poet in the Beauty loop, with poet-specific and children’s archive resource links.
