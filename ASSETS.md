@@ -37,3 +37,23 @@ Source: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8c
 Prompt:
 
 Original delicate botanical watercolour illustration, transparent background. One small naturally growing clump of meadow grass with slender green blades, two elegant blue cornflowers and several tiny pale blue forget-me-not flowers and white daisies. Upright compact composition centered on canvas, organically irregular silhouette with generous clear transparent margin. Beautiful observational botanical detail with translucent pigment washes, forest green and sage leaves, cornflower and sky blue blossoms, white petals with tiny subtle centers. Fresh peaceful nature study, graceful rather than cartoon, readable as a small homeschool app emblem. No container, ribbon, sun, birds, household objects, lettering, logo, signature, watermark or painted background. No orange, no yellow-dominant colors. Genuine transparent alpha around the entire illustration.
+
+# Literary botanical reference · 25 October 2026
+
+Built-in image generation produced original artwork inspired by the parent's latest teacup/books/morning-glory reference. Transparent source images were resized and exported to WebP. The PNG app icons use the emblem embedded as PNG in the SVG source, with outlined Courgette lettering.
+
+## public/literary-table.webp
+
+Source: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8cd39563/exec-4b23de6f-45ec-45d3-bd75-d1e37eb59ca9.png`
+
+Prompt:
+
+Create an original exquisite traditional watercolour illustration for a quiet family learning journal, genuine transparent background. A delicate ivory porcelain teacup with muted terracotta rim on its scalloped saucer, resting on two well-loved closed books: top cloth cover patterned in muted ink blue and sage, lower cover dusty plum, cream page edges. A small blue butterfly hovers near the cup handle. Loosely growing blue morning-glory blossoms with subtle mauve throats and sage heart-shaped leaves curl gently around the base. Composition compact, landscape 3:2, all subjects fully visible with transparent space around them. Mood peaceful, literary, botanical and contemplative. Thin translucent watercolor washes, softly feathered edges, uneven pigment, subtly observed real forms. Restrained antique palette: parchment ivory, smoky blue, sage, dusty plum, tiny warm clay accents. No bright primary colors, no meadow grass, no sun, no bird, no lettering, quotation, signature, watermark, border or background wash. This is a new still life for an app heading, recognizable at 260px wide.
+
+## public/morning-glory.webp
+
+Source: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8cd39563/exec-534035c5-e0ba-4672-b65c-f29b531eb870.png`
+
+Prompt:
+
+An original small botanical emblem in delicate traditional watercolor on genuinely transparent background. A single gracefully open blue morning glory flower with a dusty mauve throat, two soft sage heart-shaped leaves and a gently curling short stem, accompanied by a small muted ink-blue butterfly hovering just above the flower. Compact upright composition, generous transparent margin on all sides, natural observational proportions, translucent pale pigment and feathered edges, quiet antique book illustration mood. Restrained smoky blue, dusty mauve, sage green, warm ivory highlights. Readable at small app-header size. No bouquet, grass, sun, teacup, book, lettering, signature, watermark, border, solid background, fake paper rectangle or cartoon outlines.

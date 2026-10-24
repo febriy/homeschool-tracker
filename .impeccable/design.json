@@ -1,15 +1,16 @@
 {
-  "name": "Wonder and Worship \u2014 meadow",
+  "name": "Wonder and Worship \u2014 literary botanical journal",
   "mode": "operate",
   "colors": {
-    "paper": "#f3f8f5",
-    "card": "#fcfefc",
-    "ink": "#193d35",
-    "muted": "#506b64",
-    "accent": "#235c78",
-    "line": "#cbded6",
-    "covered": "#2e634a",
-    "today": "#e4f0f6"
+    "paper": "#f8efdf",
+    "card": "#fffaf0",
+    "ink": "#443e36",
+    "muted": "#716454",
+    "accent": "#3d5873",
+    "line": "#d9ccb9",
+    "covered": "#4b674e",
+    "today": "#f1e5d2",
+    "plum": "#735565"
   },
   "typography": {
     "wordmark": "Courgette",
@@ -17,8 +18,8 @@
     "body": "system sans serif"
   },
   "assets": [
-    "public/meadow-border.webp",
-    "public/meadow-sprig.webp"
+    "public/literary-table.webp",
+    "public/morning-glory.webp"
   ],
   "constraints": [
     "Keep artwork outside controls and record content",
