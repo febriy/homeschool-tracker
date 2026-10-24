@@ -12,7 +12,7 @@ http.createServer(async (req,res) => {
     const response=await handler(request);
     res.writeHead(response.status,Object.fromEntries(response.headers));res.end(await response.text());return;
   }
-  const files={'/':'index.html','/index.html':'index.html','/sync.js':'sync.js','/app.js':'public/app.js','/styles.css':'public/styles.css','/curriculum.js':'public/curriculum.js'};
+  const files={'/':'index.html','/index.html':'index.html','/sync.js':'sync.js','/app.js':'public/app.js','/styles.css':'public/styles.css','/curriculum.js':'public/curriculum.js','/skills.js':'public/skills.js','/skill-data.js':'public/skill-data.js'};
   if (!files[url.pathname]) {res.writeHead(404);res.end('Not found');return;}
   res.setHeader('Content-Type',url.pathname.endsWith('.js')?'text/javascript':url.pathname.endsWith('.css')?'text/css':'text/html');
   res.end(await readFile(files[url.pathname]));
