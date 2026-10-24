@@ -1,4 +1,5 @@
-export function setupPhotos({getChild,childName,t,esc,announce,singaporeDay,dateLabel}) {
+import { learningSubjects } from './learning-data.js';
+export function setupPhotos({getChild,childName,t,esc,announce,singaporeDay,dateLabel,onChange=()=>{}}) {
   const $=id=>document.getElementById(id);
   let photos=[],loaded=false,loading=false,uploading=false,previewURLs=[],completed=new Set(),uploadIds=new Map(),failed=false;
   const copy={
@@ -17,13 +18,15 @@ export function setupPhotos({getChild,childName,t,esc,announce,singaporeDay,date
   function render(){
     for(const [id,words] of Object.entries(copy))if(!uploading||id!=='save-photo')$(id).textContent=words[chinese()?1:0];
     const removed=$('show-removed').checked,child=getChild();
-    const list=photos.filter(p=>p.childId===child&&p.deleted===removed);
+    const subjectFilter=$('photo-filter-subject').value||'all',groupBy=$('photo-group-by').value;
+    const list=photos.filter(p=>p.childId===child&&p.deleted===removed&&(subjectFilter==='all'||p.subject===subjectFilter)).sort((a,b)=>groupBy==='subject'?a.subject.localeCompare(b.subject)||b.date.localeCompare(a.date):b.date.localeCompare(a.date));
+    let lastGroup='';
     $('photo-summary').textContent=childName(child)+' · '+(loading?say('Loading photos…','正在加载照片…'):say(`${list.length} ${list.length===1?'photo':'photos'}`,`${list.length} 张照片`));
     if(failed){$('photo-gallery').innerHTML=`<div class="empty-state"><h2>${say('Photos couldn’t load.','无法加载照片。')}</h2><p>${say('Your saved photos are still online. Check your connection and retry.','已保存的照片仍在云端。请检查网络后重试。')}</p></div>`;$('retry-photos').hidden=false;return}
     $('retry-photos').hidden=true;
-    $('photo-gallery').innerHTML=list.length?list.map(p=>`<figure class="photo-card">${p.deleted?`<div class="removed-photo">${say('Removed from journal','已从日记移除')}</div>`:`<a href="${esc(p.url)}" target="_blank" rel="noopener" aria-label="${esc(say('View photo: ','查看照片：')+(p.caption||dateLabel(p.date)))}"><img src="${esc(p.url)}" alt="${esc(p.caption||say('Learning moment for ','学习瞬间：')+childName(p.childId))}" loading="lazy" width="600" height="450"></a>`}<figcaption><span class="photo-date">${esc(dateLabel(p.date))} · ${esc(p.subject==='other'?say('Life & learning','生活与学习'):t({english:'English',mandarin:'Mandarin',math:'Math'}[p.subject]))}</span>${p.caption?`<p>${esc(p.caption)}</p>`:''}<button class="text-button" data-photo-id="${p.id}" data-photo-deleted="${!p.deleted}">${p.deleted?say('Restore photo','恢复照片'):say('Remove photo','移除照片')}</button></figcaption></figure>`).join(''):`<div class="empty-state photo-empty"><img src="/sunflower.svg" alt="" width="64" height="64"><h2>${loading?say('Gathering your moments…','正在加载…'):removed?say('No removed photos.','没有已移除的照片。'):say('Their learning, in pictures.','用照片记下学习。')}</h2><p>${removed?say('Removed photos can be restored here.','可在此恢复已移除的照片。'):say('Add a drawing, a book page, or a moment worth keeping for ','添加画作、书页，或值得珍藏的瞬间：')+esc(childName(child))+'.'}</p>${!removed&&!loading?`<button class="button secondary" data-add-photo>${say('Add the first photo','添加第一张照片')}</button>`:''}</div>`;
+    $('photo-gallery').innerHTML=list.length?list.map(p=>{const group=groupBy==='subject'?t(learningSubjects[p.subject]||'Life & learning'):dateLabel(p.date),heading=group!==lastGroup?`<h2 class="photo-group-heading">${esc(group)}</h2>`:'';lastGroup=group;return `${heading}<figure class="photo-card">${p.deleted?`<div class="removed-photo">${say('Removed from journal','已从日记移除')}</div>`:`<a href="${esc(p.url)}" target="_blank" rel="noopener" aria-label="${esc(say('View photo: ','查看照片：')+(p.caption||dateLabel(p.date)))}"><img src="${esc(p.url)}" alt="${esc(p.caption||say('Learning moment for ','学习瞬间：')+childName(p.childId))}" loading="lazy" width="600" height="450"></a>`}<figcaption><span class="photo-date">${esc(dateLabel(p.date))} · ${esc(p.subject==='other'?say('Life & learning','生活与学习'):t(learningSubjects[p.subject]||'Life & learning'))}</span>${p.caption?`<p>${esc(p.caption)}</p>`:''}<button class="text-button" data-photo-id="${p.id}" data-photo-deleted="${!p.deleted}">${p.deleted?say('Restore photo','恢复照片'):say('Remove photo','移除照片')}</button></figcaption></figure>`}).join(''):`<div class="empty-state photo-empty"><img src="/sunflower-real.png" alt="" width="64" height="64"><h2>${loading?say('Gathering your moments…','正在加载…'):removed?say('No removed photos.','没有已移除的照片。'):say('Their learning, in pictures.','用照片记下学习。')}</h2><p>${removed?say('Removed photos can be restored here.','可在此恢复已移除的照片。'):say('Add a drawing, a book page, or a moment worth keeping for ','添加画作、书页，或值得珍藏的瞬间：')+esc(childName(child))+'.'}</p>${!removed&&!loading?`<button class="button secondary" data-add-photo>${say('Add the first photo','添加第一张照片')}</button>`:''}</div>`;
   }
-  async function refresh(){if(loading)return;loading=true;render();try{const response=await fetch('/api/photos',{cache:'no-store'});if(!response.ok)throw Error();photos=(await response.json()).photos;loaded=true;failed=false}catch{failed=true}finally{loading=false;render()}}
+  async function refresh(){if(loading)return;loading=true;render();try{const response=await fetch('/api/photos',{cache:'no-store'});if(!response.ok)throw Error();photos=(await response.json()).photos;loaded=true;failed=false}catch{failed=true}finally{loading=false;render();onChange()}}
   function releasePreviews(){for(const url of previewURLs)URL.revokeObjectURL(url);previewURLs=[]}
   function preview(){releasePreviews();completed.clear();uploadIds.clear();const files=[...$('photo-file').files];$('photo-previews').innerHTML=files.slice(0,10).map(file=>{const url=URL.createObjectURL(file);previewURLs.push(url);return `<figure><img src="${url}" alt="${esc(file.name)}"><figcaption>${esc(file.name)}</figcaption></figure>`}).join('');$('photo-status').textContent=files.length>10?say('Choose up to 10 photos at a time.','每次最多选择 10 张照片。'):''}
   async function resize(file){
@@ -70,5 +73,22 @@ export function setupPhotos({getChild,childName,t,esc,announce,singaporeDay,date
   });
   window.addEventListener('beforeunload',event=>{if(uploading||$('photo-file').files.length){event.preventDefault();event.returnValue=''}});
   window.addEventListener('focus',()=>{if(loaded)refresh()});
-  render();return {render,refresh};
+  for(const id of ['photo-group-by','photo-filter-subject'])$(id).addEventListener('change',render);
+  $('photo-filter-subject').innerHTML='<option value="all">All subjects</option>'+Object.entries(learningSubjects).map(([id,label])=>`<option value="${id}">${esc(label)}</option>`).join('');
+  $('photo-subject').innerHTML=Object.entries(learningSubjects).map(([id,label])=>`<option value="${id}">${esc(label)}</option>`).join('');$('photo-subject').value='other';
+  render();return {render,refresh,getPhotos:()=>photos};
+}
+
+export async function uploadLearningPhotos(files,details,{ids=new Map(),done=new Set(),onProgress=()=>{}}={}){
+  if(files.length>10)throw Error('Choose up to 10 photos at a time.');
+  for(let i=0;i<files.length;i++){
+    if(done.has(i))continue;onProgress(`Uploading photo ${i+1} of ${files.length}…`);
+    const file=files[i];if(!['image/jpeg','image/png','image/webp'].includes(file.type))throw Error('Use JPEG, PNG or WebP photos.');
+    if(file.size>30*1024*1024)throw Error('Choose an original photo under 30 MB.');
+    const bitmap=await createImageBitmap(file);let blob;
+    try{const ratio=Math.min(1,1600/Math.max(bitmap.width,bitmap.height)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(bitmap.width*ratio));canvas.height=Math.max(1,Math.round(bitmap.height*ratio));const context=canvas.getContext('2d');context.fillStyle='#fff';context.fillRect(0,0,canvas.width,canvas.height);context.drawImage(bitmap,0,0,canvas.width,canvas.height);blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.84))}finally{bitmap.close()}
+    if(!blob||blob.size>3*1024*1024)throw Error('Try a smaller photo.');
+    const form=new FormData();for(const [key,value]of Object.entries(details))form.set(key,value);form.set('photo',blob,'learning-moment.jpg');if(!ids.has(i))ids.set(i,crypto.randomUUID());form.set('uploadId',ids.get(i));
+    const response=await fetch('/api/photos',{method:'POST',body:form}),data=await response.json().catch(()=>({}));if(!response.ok)throw Error(data.error||'Upload didn’t finish. Retry to save the remaining photos.');done.add(i);
+  }
 }

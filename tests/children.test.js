@@ -10,7 +10,7 @@ test('children’s plan contains the supplied daily curricula and three loops',(
   assert.equal(bible.length,5);
   assert.equal(loops.beauty.items.length,4);
   assert.equal(loops.literature.items[0].title,'Literary Ladder');
-  assert.deepEqual(loops.history.items.map(x=>x.title),['BiblioPlan · Roman','Student Bible Atlas']);
+  assert.deepEqual(loops.history.items.map(x=>x.title),['BiblioPlan','Student Bible Atlas']);
   assert.ok(!JSON.stringify({subjects,loops,bible}).includes('Zaobao'));
 });
 test('validates dated subject records, named children and reversible removal',()=>{
