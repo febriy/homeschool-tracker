@@ -72,3 +72,9 @@ nav{background:#f8efdf;border-color:#d9ccb9}nav button[aria-current=page]{backgr
 .bible-section{background:#f0e8d9}.bible-section .study-row{border-color:#d9ccb9}.quiet-count{color:#716454}.loop-tabs button[aria-pressed=true]{background:#735565;border-color:#735565}.resource-link{background:#fffaf0;color:#3d5873}.journal-art{width:100px;height:110px}.photo-empty>img{width:150px;height:160px}
 @media(max-width:650px){.brand .mark{width:37px;height:44px;flex-basis:37px}.sunny-heading{padding:24px 21px;min-height:285px}.sunny-heading h1{max-width:290px;font-size:28px}.sunny-heading p{max-width:290px}.sunny-heading time{margin-top:53px;max-width:145px;font-size:11px}.heading-pattern{width:175px;height:136px;inset:auto 0 0 auto;transform:none}.journal-art{width:74px;height:88px}}
 @media(min-width:651px) and (max-width:950px){.sunny-heading{padding-right:250px;min-height:250px}.heading-pattern{width:235px;height:210px}.sunny-heading h1{font-size:31px}}
+/* The day opens inside a botanical scene, with a quiet area for real text. */
+.sunny-heading{min-height:315px;padding:27px 32px 175px}
+.sunny-heading h1{max-width:680px}.sunny-heading p{max-width:590px}.sunny-heading time{margin-top:14px;max-width:none}
+.heading-pattern{inset:auto 0 0;width:100%;height:190px;transform:none;object-fit:cover;object-position:center bottom;mask-image:linear-gradient(to bottom,transparent,#000 34%);-webkit-mask-image:linear-gradient(to bottom,transparent,#000 34%)}
+@media(max-width:650px){.sunny-heading{min-height:304px;padding:23px 21px 135px}.sunny-heading h1{max-width:295px;font-size:28px}.sunny-heading p{max-width:295px}.sunny-heading time{margin-top:13px;font-size:11px}.heading-pattern{width:100%;height:145px;object-position:center bottom}}
+@media(min-width:651px) and (max-width:950px){.sunny-heading{min-height:328px;padding:26px 28px 180px}.sunny-heading h1{font-size:32px}.heading-pattern{height:185px}}

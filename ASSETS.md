@@ -57,3 +57,11 @@ Source: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8c
 Prompt:
 
 An original small botanical emblem in delicate traditional watercolor on genuinely transparent background. A single gracefully open blue morning glory flower with a dusty mauve throat, two soft sage heart-shaped leaves and a gently curling short stem, accompanied by a small muted ink-blue butterfly hovering just above the flower. Compact upright composition, generous transparent margin on all sides, natural observational proportions, translucent pale pigment and feathered edges, quiet antique book illustration mood. Restrained smoky blue, dusty mauve, sage green, warm ivory highlights. Readable at small app-header size. No bouquet, grass, sun, teacup, book, lettering, signature, watermark, border, solid background, fake paper rectangle or cartoon outlines.
+
+## public/reading-garden.webp · immersive day panel
+
+Generated with built-in image generation. Source: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8cd39563/exec-fb5caa1e-67b5-427a-a21c-3ace60ddeba6.png`. Resized to 1400px WebP with transparency preserved.
+
+Prompt:
+
+Create an original immersive wide botanical watercolour border for a family learning journal banner. Panoramic landscape composition. Delicate trailing blue morning glory flowers with dusty mauve throats and sage heart-shaped leaves grow across the entire lower edge, naturally taller at far left and far right, lower and airy in the middle. At the lower right among the vines sits a small ivory teacup on two well-loved muted blue and plum books, and two small blue butterflies float near the blossoms. This is one cohesive environmental scene, not a collage of isolated stickers. The upper half and especially upper-left center must remain completely transparent and quiet for app headline text; irregular organic foliage tops with transparent clear space between leaves and stems. All primary objects entirely in frame. Traditional translucent watercolour with softened pigment edges and gentle natural observational details; antique literary garden mood. Muted smoky blue, dusty plum, sage and parchment ivory, no bright primaries. Transparent background, no sky rectangle, no text, no lettering, no quotation, no signature, no watermark. Broad landscape spread rather than a compact bouquet, calm airy center.
