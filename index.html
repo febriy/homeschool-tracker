@@ -6,10 +6,10 @@
   <meta name="theme-color" content="#fff9e9">
   <meta name="description" content="The Yeo family’s shared children’s homeschool plan and learning records.">
   <title>Wonder and Worship · Children’s Learning Loop</title>
-  <link rel="manifest" href="/manifest.webmanifest?v=circular-2">
-  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=circular-2">
-  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=circular-2">
-  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=circular-2">
+  <link rel="manifest" href="/manifest.webmanifest?v=first-light-3">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32.png?v=first-light-3">
+  <link rel="icon" type="image/png" sizes="192x192" href="/icon-192.png?v=first-light-3">
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png?v=first-light-3">
   <meta name="mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-capable" content="yes">
   <meta name="apple-mobile-web-app-title" content="Wonder and Worship">
@@ -18,7 +18,7 @@
 </head>
 <body>
   <div class="app">
-    <header><div class="brand"><img class="mark" src="/bloom.svg" alt="" width="48" height="48"><div><div class="brand-name">Wonder and Worship</div><div class="brand-sub" id="brand-sub">Yeo family · Children’s learning</div></div></div><div class="lang-switch" aria-label="Language"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="zh" aria-pressed="false">中文</button></div></header>
+    <header><div class="brand"><img class="mark" src="/first-light.svg" alt="" width="48" height="48"><div><div class="brand-name">Wonder and Worship</div><div class="brand-sub" id="brand-sub">Yeo family · Children’s learning</div></div></div><div class="lang-switch" aria-label="Language"><button data-lang="en" aria-pressed="true">EN</button><button data-lang="zh" aria-pressed="false">中文</button></div></header>
     <div class="shared-bar"><div><span id="sync-status" role="status" aria-live="polite">Connecting to shared tracker…</span><span class="shared-detail" id="shared-detail">One shared tracker · no sign-in needed</span></div><button id="sync-retry" class="button secondary" hidden>Retry save</button></div>
     <section class="learner-bar" aria-label="Children’s trackers">
       <div class="learner-top"><span id="learner-label">Who’s learning today?</span><button class="text-button" id="manage-children" aria-expanded="false" aria-controls="child-details">Manage children</button></div>
@@ -31,7 +31,7 @@
       </details>
     </section>
     <main id="main" tabindex="-1">
-      <section id="today-view" class="view active"><div class="page-heading sunny-heading"><img class="heading-pattern" src="/floral-pattern.svg" alt="" width="240" height="240"><div><h1 id="today-heading">The children’s learning day.</h1><p id="today-intro">Daily foundations, a little beauty, and room to grow.</p></div><time id="today-date"></time></div><section class="bible-section" aria-labelledby="bible-heading"><div class="section-heading"><div><h2 id="bible-heading">Bible & worship</h2><p id="bible-copy">Read, sing, and remember together.</p></div><span id="bible-progress" class="quiet-count"></span></div><div id="bible-list"></div></section><section aria-labelledby="core-heading"><div class="section-heading"><div><h2 id="core-heading">English, Mandarin & math</h2><p id="core-copy">Pick up at the last lesson. Record what you cover today.</p></div></div><div id="core-list"></div></section><section aria-labelledby="loop-heading"><div class="section-heading"><div><h2 id="loop-heading">A little from the loop</h2><p id="loop-copy">Beauty, literature, then history. Move at your own pace.</p></div></div><div id="loop-tabs" class="loop-tabs" role="group" aria-label="Choose a loop"></div><div class="loop-panel"><div id="loop-current"></div><button id="next-loop" class="button secondary">Continue to next loop</button></div></section></section>
+      <section id="today-view" class="view active"><div class="page-heading sunny-heading"><img class="heading-pattern" src="/first-light.svg" alt="" width="240" height="240"><div><h1 id="today-heading">The children’s learning day.</h1><p id="today-intro">Daily foundations, a little beauty, and room to grow.</p></div><time id="today-date"></time></div><section class="bible-section" aria-labelledby="bible-heading"><div class="section-heading"><div><h2 id="bible-heading">Bible & worship</h2><p id="bible-copy">Read, sing, and remember together.</p></div><span id="bible-progress" class="quiet-count"></span></div><div id="bible-list"></div></section><section aria-labelledby="core-heading"><div class="section-heading"><div><h2 id="core-heading">English, Mandarin & math</h2><p id="core-copy">Pick up at the last lesson. Record what you cover today.</p></div></div><div id="core-list"></div></section><section aria-labelledby="loop-heading"><div class="section-heading"><div><h2 id="loop-heading">A little from the loop</h2><p id="loop-copy">Beauty, literature, then history. Move at your own pace.</p></div></div><div id="loop-tabs" class="loop-tabs" role="group" aria-label="Choose a loop"></div><div class="loop-panel"><div id="loop-current"></div><button id="next-loop" class="button secondary">Continue to next loop</button></div></section></section>
       <section id="plan-view" class="view"><div class="page-heading"><div><h1 id="plan-heading">Their study plan.</h1><p id="plan-intro">Your children’s curriculum, gathered in one place.</p></div></div><div id="plan-content"></div></section>
       <section id="progress-view" class="view"><div class="page-heading"><div><h1>A little progress, every day.</h1><p>Tick what you covered. Keep a photo. See their learning grow.</p></div><button class="button" id="new-entry">Record lesson</button></div>
         <section id="record-panel" class="record-panel" hidden aria-labelledby="record-heading"><h2 id="record-heading">Record a lesson</h2><form id="record-form"><div class="form-grid">
