@@ -17,3 +17,23 @@ Source: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8c
 Prompt:
 
 Use case: illustration-story. Create one original delicate traditional watercolour illustration for a family homeschool journal app, genuinely transparent background. Two well-loved clothbound books lying flat in a short stack, one warm terracotta and one sage green, with cream page edges. A small ochre and brown garden songbird perched gently on the top book, and a loose little branch bearing two white blossoms and green leaves beside the books. Charming ordinary objects with a nature-study sensibility, quiet joy, hope and wonder. Painterly translucent pigment washes, fine natural observational forms, subtle pigment blooms and soft dry-brush edges. Warm cream, golden yellow, burnt orange, sage green; no flat vector style or cartoon faces. Compact centered horizontal composition, all objects fully in frame and transparent clear space all around; readable at 140px width. No text, lettering, signature, watermark, background, or ground shadow.
+
+# Meadow redesign · 25 October 2026
+
+Built-in image generation created the two original botanical assets below. Resizing and WebP export preserve transparent alpha. These replace the domestic still lifes in the active app. The app icon embeds the sprig with outlined Courgette lettering; PNG sizes include a separately padded 512px maskable export.
+
+## public/meadow-border.webp
+
+Source: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8cd39563/exec-50023b19-e3fc-4b20-a143-e762f1e2b441.png`
+
+Prompt:
+
+Create an original botanical watercolour asset for a green and blue nature-themed homeschool app. A wide panoramic meadow border: lush fresh green grasses of varying heights, delicate fine seed heads, blue cornflowers, pale blue forget-me-nots and a few small white daisies, airy natural wildflowers growing freely. Landscape 3:2 canvas, composition concentrated in bottom 60 percent with irregular tops of grass and flower stems, upper 40 percent completely transparent. Grass spans full width, taller flower clumps toward sides with lower grass through center, no pots or domestic objects. Delicate observed botanical forms and translucent traditional watercolour pigment, restrained rich forest and sage greens, sky and cornflower blue, white flower petals. Fresh peaceful spring garden, hopeful and full of wonder. Genuine transparent background, natural organic edges, no painted sky, no rectangular wash, no text, no lettering, no signature, no watermark, no symbols. Will be shown as an immersive meadow border under text on a pale blue app heading. Not vector, not cartoon, no orange flowers, no yellow-dominant palette.
+
+## public/meadow-sprig.webp
+
+Source: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8cd39563/exec-78fe3ddf-32d6-4a3e-a676-70c2ede6484d.png`
+
+Prompt:
+
+Original delicate botanical watercolour illustration, transparent background. One small naturally growing clump of meadow grass with slender green blades, two elegant blue cornflowers and several tiny pale blue forget-me-not flowers and white daisies. Upright compact composition centered on canvas, organically irregular silhouette with generous clear transparent margin. Beautiful observational botanical detail with translucent pigment washes, forest green and sage leaves, cornflower and sky blue blossoms, white petals with tiny subtle centers. Fresh peaceful nature study, graceful rather than cartoon, readable as a small homeschool app emblem. No container, ribbon, sun, birds, household objects, lettering, logo, signature, watermark or painted background. No orange, no yellow-dominant colors. Genuine transparent alpha around the entire illustration.
