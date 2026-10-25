@@ -1,5 +1,11 @@
 // Authored interface and teaching guidance. Learner input and original book titles stay unchanged.
 export const zh = {
+  "Next characters to explore":"接下来探索的汉字",
+  "Next letter sound":"下一个字母发音",
+  "Next sight word":"下一个常见词",
+  "All characters covered.":"所有汉字都已教过。",
+  "All letter sounds covered.":"所有字母发音都已教过。",
+  "All sight words covered.":"所有常见词都已教过。",
   "Rate & review":"评分与书评",
   "{rating}/5 enjoyment":"喜爱程度 {rating}/5",
   "Review for {child}":"{child} 的阅读评价",

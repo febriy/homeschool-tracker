@@ -43,3 +43,15 @@ export function learnerSubjects(child){return Object.fromEntries(Object.entries(
 export function updateBookReview(previous={},review,date) {
   return {...previous,read:previous.read??false,date:previous.date||date,rating:review.rating,recommendation:review.recommendation,comment:review.comment};
 }
+
+// Follow the existing checklist order, using each learner’s own coverage records.
+export function nextLanguageSkills(subject,records={},child='together') {
+  const groups=checklistGroups(subject,records,child);
+  const uncovered=item=>!records[`skill:${child}:${item.id}`]?.covered;
+  if(subject==='mandarin'&&!isAdult(child))return {characters:groups.flatMap(g=>g.items).filter(uncovered).slice(0,5)};
+  if(subject==='english'&&!isAdult(child))return {
+    sound:[...(groups.find(g=>g.id==='lower')?.items||[]).filter(item=>item.letterTarget==='sound'),...(groups.find(g=>g.id==='vowels')?.items||[])].find(uncovered)||null,
+    sightWord:(groups.find(g=>g.id==='sight')?.items||[]).find(uncovered)||null
+  };
+  return {};
+}
