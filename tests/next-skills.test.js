@@ -29,3 +29,20 @@ test('completed English suggestions have clear empty states and include family-a
  assert.equal(nextLanguageSkills('english',records,'a').sound.id,'en-sound-long-a');
  assert.deepEqual(nextLanguageSkills('mandarin',records,'parent'),{});
 });
+
+test('together view gives each child their own focus, excluding shared and adult progress',async()=>{
+ const {subjectFocus}=await import('../public/learning-data.js');
+ const records={'profile:together':{name:'Children together'},'profile:parent':{name:'My learning'},'profile:carisa':{name:'Carisa'},'profile:ethan':{name:'Ethan'},'skill:carisa:en-sound-a':{covered:true},'skill:ethan:en-word-i':{covered:true},'skill:together:en-sound-b':{covered:true},'skill:carisa:zh-b1-1':{covered:true},'skill:ethan:zh-b1-2':{covered:true},'skill:carisa:math-count20':{covered:true,secure:true},'skill:ethan:math-parts':{covered:false,needsPractice:true}};
+ const english=subjectFocus('english',records);
+ assert.deepEqual(english.map(x=>x.name),['Carisa','Ethan']);
+ assert.equal(english[0].sound.id,'en-sound-b');assert.equal(english[0].sightWord.label,'I');
+ assert.equal(english[1].sound.id,'en-sound-a');assert.equal(english[1].sightWord.label,'a');
+ assert.deepEqual(english.map(x=>x.covered),[1,1]);
+ const mandarin=subjectFocus('mandarin',records);
+ assert.equal(mandarin[0].characters[0].label,'高');assert.equal(mandarin[1].characters[0].label,'山');
+ const math=subjectFocus('math',records);
+ assert.equal(math[0].next.id,'math-count10');assert.equal(math[1].next.id,'math-parts');
+ assert.deepEqual(subjectFocus('english',records,'ethan').map(x=>x.name),['Ethan']);
+ assert.deepEqual(subjectFocus('english',records,'parent'),[]);
+ assert.deepEqual(subjectFocus('english',{},'together'),[]);
+});

@@ -1,5 +1,5 @@
 import { isAdult,learnerCurriculum,adultMandarin } from './curriculum.js';
-import { englishGroups,sageBooks,mathGroups,skillText } from './skill-data.js';
+import { englishGroups,sageBooks,mathGroups,skillText,mathStatus } from './skill-data.js';
 export const learningSubjects={english:'English',mandarin:'Mandarin',math:'Math',bible:'Bible & worship',beauty:'Beauty loop',literature:'Literature',history:'History',geography:'Geography',nature:'Natural philosophy',other:'Life & learning'};
 export function checklistGroups(subject,records={},child='together'){
   if(isAdult(child)){const plan=learnerCurriculum(child),items=subject==='mandarin'?adultMandarin:subject==='bible'?plan.bible:plan.loops[subject]?.items||(subject==='other'?[{id:'other',title:'Life & learning'}]:[]);return [{id:subject,title:learningSubjects[subject],items:items.map(x=>({id:'activity-'+x.id,label:x.title}))}]}
@@ -54,4 +54,15 @@ export function nextLanguageSkills(subject,records={},child='together') {
     sightWord:(groups.find(g=>g.id==='sight')?.items||[]).find(uncovered)||null
   };
   return {};
+}
+
+export function subjectFocus(subject,records={},activeChild='together') {
+  if(isAdult(activeChild))return [];
+  const learners=activeChild==='together'?Object.entries(records).filter(([key,value])=>key.startsWith('profile:')&&value&&key!=='profile:together'&&!isAdult(key.slice(8))).map(([key,value])=>({id:key.slice(8),name:value.name})):[{id:activeChild,name:records['profile:'+activeChild]?.name||activeChild}];
+  return learners.map(learner=>{
+    const items=checklistGroups(subject,records,learner.id).flatMap(group=>group.items),state=item=>records[`skill:${learner.id}:${item.id}`]||{};
+    const covered=items.filter(item=>subject==='math'?mathStatus(state(item))!=='unchecked':state(item).covered).length;
+    const next=subject==='math'?items.find(item=>mathStatus(state(item))==='practice')||items.find(item=>mathStatus(state(item))==='unchecked')||items.find(item=>mathStatus(state(item))==='observed'):null;
+    return {...learner,covered,total:items.length,next,...nextLanguageSkills(subject,records,learner.id)};
+  });
 }

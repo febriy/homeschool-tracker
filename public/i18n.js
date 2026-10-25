@@ -1,5 +1,8 @@
 // Authored interface and teaching guidance. Learner input and original book titles stay unchanged.
 export const zh = {
+  "{child}’s focus":"{child} 的学习重点",
+  "Add a child to see their individual focus.":"添加孩子，即可查看每位孩子的学习重点。",
+  "All maths skills mastered.":"所有数学技能都已掌握。",
   "Next characters to explore":"接下来探索的汉字",
   "Next letter sound":"下一个字母发音",
   "Next sight word":"下一个常见词",

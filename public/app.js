@@ -1,7 +1,7 @@
-import { skillText,mathStatus } from './skill-data.js';
+import { skillText } from './skill-data.js';
 import { translate,staticTranslations } from './i18n.js';
 import { setupLearning } from './learning.js';
-import { learningSubjects,checklistGroups,nextLanguageSkills } from './learning-data.js';
+import { learningSubjects,checklistGroups,subjectFocus } from './learning-data.js';
 import { setupPhotos } from './photos.js';
 import { setupSkills } from './skills.js';
 import { subjects,bible,loops,isAdult,learnerCurriculum,adultMandarin,singaporeDay,progressEntries,defaultRecords } from './curriculum.js';
@@ -35,18 +35,18 @@ function chooseChild(id){activeChild=id;localStorage.setItem('children-active-ch
 function activityKey(id){return activeChild==='together'?'check:'+singaporeDay()+':'+id:'activity:'+activeChild+':'+singaporeDay()+':'+id}
 function checkRow(item){const checked=records[activityKey(item.id)]===true;return `<div class="study-row ${checked?'checked':''}"><label class="study-check"><input type="checkbox" data-check="${item.id}" ${checked?'checked':''}><span><strong>${esc(t(item.title))}</strong><small>${esc(t(item.detail))}</small></span></label>${item.link?`<a class="resource-link" href="${esc(item.link)}" target="_blank" rel="noopener noreferrer">${esc(t(item.linkLabel))}</a>`:''}${item.extraLink?`<a class="resource-link" href="${esc(item.extraLink)}" target="_blank" rel="noopener noreferrer">${esc(t(item.extraLinkLabel))}</a>`:''}</div>`}
 function renderBible(){const bible=learnerCurriculum(activeChild).bible;$('bible-list').innerHTML=bible.map(checkRow).join('');const n=bible.filter(x=>records[activityKey(x.id)]).length;$('bible-progress').textContent=lang==='zh'?`${n} / ${bible.length} 项`:`${n} of ${bible.length} today`}
-function languageSuggestions(subject){
-  const next=nextLanguageSkills(subject,records,activeChild);
+function languageSuggestions(subject,next){
   if(subject==='mandarin')return `<dl class="next-skills"><div><dt>${esc(t('Next characters to explore'))}</dt><dd class="next-characters">${next.characters.length?next.characters.map(item=>esc(localStorage.getItem('sage-script')==='traditional'?item.label:item.simplified)).join(' · '):esc(t('All characters covered.'))}</dd></div></dl>`;
   return `<dl class="next-skills"><div><dt>${esc(t('Next letter sound'))}</dt><dd>${next.sound?`${esc(skillText(next.sound,t))}<small>${esc(t(next.sound.help))}</small>`:esc(t('All letter sounds covered.'))}</dd></div><div><dt>${esc(t('Next sight word'))}</dt><dd>${next.sightWord?esc(skillText(next.sightWord,t)):esc(t('All sight words covered.'))}</dd></div></dl>`;
 }
 function renderCore(){
   if(isAdult(activeChild)){$('core-list').innerHTML='<p class="curriculum-name">'+esc(t('Podcasts · 联合早报 · Preply'))+'</p>'+adultMandarin.map(checkRow).join('')+'<button class="button secondary" data-record="mandarin">'+esc(t('Record lesson'))+'</button>';return}
   $('core-list').innerHTML=Object.entries(subjects).map(([key,subject])=>{
-    const items=checklistGroups(key,records).flatMap(g=>g.items),covered=items.filter(item=>records['skill:'+activeChild+':'+item.id]?.covered).length;
-    const next=items.find(item=>mathStatus(records['skill:'+activeChild+':'+item.id])==='practice')||items.find(item=>!records['skill:'+activeChild+':'+item.id]?.covered);
-    const suggestions=key==='math'?(next?esc(t('Next to explore: {skill}',{skill:skillText(next,t)})):esc(t('All items covered. Revisit anything that needs practice.'))):languageSuggestions(key);
-    return `<article class="core-row"><div><h3>${esc(t(subject.title))}</h3><p class="curriculum-name">${esc(t(subject.curriculum))}</p><button class="text-button skill-shortcut" data-skill-open="${key}">${esc(t('Skill checklist'))}</button></div><div class="latest-record"><strong>${covered} / ${items.length} ${esc(t('Covered'))}</strong>${suggestions}</div><button class="button secondary" data-record="${key}">${esc(t('Record lesson'))}</button></article>`;
+    const focuses=subjectFocus(key,records,activeChild);
+    return `<article class="core-row subject-focus"><h3>${esc(t(subject.title))}</h3><p class="curriculum-name">${esc(t(subject.curriculum))}</p>${focuses.length?focuses.map(focus=>{
+      const suggestions=key==='math'?`<p class="math-next-focus">${focus.next?esc(skillText(focus.next,t)):esc(t('All maths skills mastered.'))}</p>`:languageSuggestions(key,focus);
+      return `<section class="learner-focus" data-focus-learner="${esc(focus.id)}"><h4>${esc(t('{child}’s focus',{child:focus.name}))}</h4><div class="latest-record"><strong>${focus.covered} / ${focus.total} ${esc(t(key==='math'?'assessed':'Covered'))}</strong>${suggestions}</div><div class="focus-actions"><button class="text-button skill-shortcut" data-skill-open="${key}" data-focus-child="${esc(focus.id)}">${esc(t('Skill checklist'))}</button><button class="button secondary" data-record="${key}" data-focus-child="${esc(focus.id)}">${esc(t('Record lesson'))}</button></div></section>`;
+    }).join(''):`<p class="field-hint">${esc(t('Add a child to see their individual focus.'))}</p>`}</article>`;
   }).join('');
 }
 const rotationKey=()=>isAdult(activeChild)?'rotation:parent':'rotation';
@@ -63,7 +63,7 @@ function language(){document.documentElement.lang=lang==='zh'?'zh-Hans':'en';doc
 function render(){renderProfiles();language();renderBible();renderCore();renderLoop();renderPlan();renderRecords();renderNote();skillUI?.render();photoUI?.render();learningUI?.render()}
 function navigate(next){view=next;if(['photos','review','progress'].includes(next))photoUI?.refresh();if(next==='ladder')learningUI?.renderLadder();if(next==='review')learningUI?.renderReview();document.querySelectorAll('.view').forEach(el=>el.classList.toggle('active',el.id===next+'-view'));document.querySelectorAll('nav [data-nav]').forEach(el=>{if(el.dataset.nav===next)el.setAttribute('aria-current','page');else el.removeAttribute('aria-current')});window.scrollTo({top:0,behavior:'instant'});$('main').focus({preventScroll:true})}
 function openRecord(subject=isAdult(activeChild)?'mandarin':'english',entry=null){navigate('progress');learningUI.open(subject,entry)}
-document.addEventListener('click',event=>{const child=event.target.closest('[data-child]');if(child){chooseChild(child.dataset.child);return}if(event.target.closest('[data-add-child]')){$('child-details').open=true;$('manage-children').setAttribute('aria-expanded','true');$('child-name').focus();return}const nav=event.target.closest('[data-nav]');if(nav){navigate(nav.dataset.nav);return}const langButton=event.target.closest('[data-lang]');if(langButton){lang=langButton.dataset.lang;localStorage.setItem('children-language',lang);render();return}const skill=event.target.closest('[data-skill-open]');if(skill){navigate('skills');skillUI.open(skill.dataset.skillOpen);return}const record=event.target.closest('[data-record]');if(record){openRecord(record.dataset.record);return}const loop=event.target.closest('[data-loop]');if(loop){put(rotationKey(),loop.dataset.loop);renderLoop();return}});
+document.addEventListener('click',event=>{const child=event.target.closest('[data-child]');if(child){chooseChild(child.dataset.child);return}if(event.target.closest('[data-add-child]')){$('child-details').open=true;$('manage-children').setAttribute('aria-expanded','true');$('child-name').focus();return}const nav=event.target.closest('[data-nav]');if(nav){navigate(nav.dataset.nav);return}const langButton=event.target.closest('[data-lang]');if(langButton){lang=langButton.dataset.lang;localStorage.setItem('children-language',lang);render();return}const skill=event.target.closest('[data-skill-open]');if(skill){if(skill.dataset.focusChild)chooseChild(skill.dataset.focusChild);navigate('skills');skillUI.open(skill.dataset.skillOpen);return}const record=event.target.closest('[data-record]');if(record){if(record.dataset.focusChild)chooseChild(record.dataset.focusChild);openRecord(record.dataset.record);return}const loop=event.target.closest('[data-loop]');if(loop){put(rotationKey(),loop.dataset.loop);renderLoop();return}});
 document.addEventListener('change',event=>{if(event.target.matches('[data-check]')){put(activityKey(event.target.dataset.check),event.target.checked);renderBible();renderLoop();learningUI.renderReview()}});
 $('active-child').addEventListener('change',()=>chooseChild($('active-child').value));
 $('manage-children').addEventListener('click',()=>{$('child-details').open=!$('child-details').open;$('manage-children').setAttribute('aria-expanded',String($('child-details').open))});
