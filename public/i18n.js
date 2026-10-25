@@ -1,5 +1,11 @@
 // Authored interface and teaching guidance. Learner input and original book titles stay unchanged.
 export const zh = {
+  "I’ve observed it":"我已观察到",
+  "Need practice":"需要练习",
+  "Mastered":"已掌握",
+  "Not checked at all":"尚未勾选",
+  "assessed":"已记录",
+  "Choose one status for each skill: I’ve observed it, Need practice, or Mastered. Untick it to leave the skill unchecked. Open the guidance for examples and notes.":"为每项技能选择一个状态：我已观察到、需要练习或已掌握。取消勾选即可恢复为尚未勾选。展开指引可查看示例和笔记。",
   "Yeo family · Learning together": "Yeo 家庭 · 一起学习",
   "One shared tracker · no sign-in needed": "共享学习记录 · 无需登录",
   "Recording for": "记录对象",
@@ -637,7 +643,7 @@ export const zh = {
   "Some editions use variants such as 甚/什 and 裏/里; use the matching lesson checkbox for your edition.": "不同版本可能使用甚／什、裏／里等异体或用字，请勾选与你的版本对应的课次。",
   "Publisher’s character chart (page 5)": "出版社汉字表（第 5 页）",
   "Sagebooks Level 1": "思展 Sagebooks 第一级",
-  "NCETM’s six Early Years areas organise this checklist. NEL references point to the 2022 Singapore preschool numeracy goals. “Direct” means the skill addresses a listed goal; “Related” is a practical connection; “Extension” has no direct listed NEL goal. This crosswalk and the observation examples are parent-facing interpretations, not an official joint standard. Secure means you have observed independent, repeatable use; it is not inferred from a coverage tick. Needs practice and this week’s lesson are separate planning choices. Montessori suggestions are practical links, not an official framework alignment.": "本清单按 NCETM 的六个幼儿数学领域整理，NEL 编号对应新加坡 2022 年学前数学目标。“直接对应”表示此技能落实所列目标；“相关”表示实践上的联系；“拓展”表示没有直接对应的 NEL 目标。此对照及观察示例是供家长使用的解读，并非官方联合标准。“能独立熟练运用”表示已观察到孩子能独立且多次稳定完成，不能仅根据“已观察到”的勾选推断。“需要练习”和“本周学习”分别用于规划，可同时勾选。蒙特梭利材料建议是实用参考，并非官方框架对应。",
+  "NCETM’s six Early Years areas organise this checklist. NEL references point to the 2022 Singapore preschool numeracy goals. “Direct” means the skill addresses a listed goal; “Related” is a practical connection; “Extension” has no direct listed NEL goal. This crosswalk and the observation examples are parent-facing interpretations, not an official joint standard. Observed means you have seen the skill; Need practice means it still needs support; Mastered means independent, repeatable use. Choose one current status. Montessori suggestions are practical links, not an official framework alignment.": "本清单按 NCETM 的六个幼儿数学领域整理，NEL 编号对应新加坡 2022 年学前数学目标。“直接对应”表示此技能落实所列目标；“相关”表示实践上的联系；“拓展”表示没有直接对应的 NEL 目标。此对照及观察示例是供家长使用的解读，并非官方联合标准。“已观察到”表示见过孩子运用此技能；“需要练习”表示仍需支持；“已掌握”表示能独立且多次稳定完成。每项技能选择一个当前状态。蒙特梭利材料建议是实用参考，并非官方框架对应。",
   "MOE NEL numeracy goals": "新加坡教育部 NEL 数学目标",
   "MOE 2022 educators’ guide": "教育部 2022 年教师指南",
   "NCETM Early Years": "NCETM 幼儿数学",

@@ -36,10 +36,29 @@ test('custom sight words are bounded and have independently trackable skill reco
 test('NCETM regrouping preserves previous math and lowercase sound IDs',()=>{
   const all=allBuiltInSkills();for(const id of ['math-count20','math-compare','math-parts','math-patterns','math-shapes','math-units','math-graph','en-sound-a','en-sound-long-a'])assert.ok(all.some(x=>x.id===id));
 });
-test('secure, practice and weekly lesson flags are independent and validated',()=>{
+test('legacy skill flags remain accepted for backward compatibility',()=>{
   const key='skill:child-a:math-parts';const value={covered:false,date:'2026-10-24',note:'Needs concrete objects',secure:false,needsPractice:true,focusWeek:'2026-10-19'};
   assert.equal(validateChildrenChanges([{key,value}]),true);
   assert.equal(validateChildrenChanges([{key,value:{...value,secure:'yes'}}]),false);
   assert.equal(validateChildrenChanges([{key,value:{...value,focusWeek:'tomorrow'}}]),false);
   assert.equal(validateChildrenChanges([{key:'custom:red-example',value:{group:'red',label:'said'}}]),true);
+});
+
+test('math has one current status, preserves older progress and treats practice-only records as checked',async()=>{
+  const {mathStatus,updateMathStatus,matchesMathStatus}=await import('../public/skill-data.js');
+  const previous={covered:false,secure:true,needsPractice:true,focusWeek:'2026-10-19',note:'Keep this observation',date:'2026-10-20'};
+  assert.equal(mathStatus(previous),'mastered');
+  assert.equal(mathStatus({needsPractice:true}),'practice');
+  assert.equal(mathStatus({covered:true}),'observed');
+  assert.equal(mathStatus({focusWeek:'2026-10-19'}),'unchecked');
+  for(const status of ['observed','practice','mastered','unchecked']){
+    const value=updateMathStatus(previous,status,'2026-10-25');
+    assert.equal(mathStatus(value),status);
+    assert.equal(value.note,previous.note);
+    assert.equal(validateChildrenChanges([{key:'skill:child-a:math-count10',value}]),true);
+    for(const filter of ['observed','practice','mastered','unchecked'])assert.equal(matchesMathStatus(value,filter),filter===status);
+    assert.equal(matchesMathStatus(value,'all'),true);
+  }
+  assert.equal(matchesMathStatus({covered:false,needsPractice:true},'unchecked'),false);
+  assert.equal(previous.needsPractice,true);
 });

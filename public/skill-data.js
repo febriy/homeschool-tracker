@@ -92,3 +92,14 @@ export const skillIds=new Set(allBuiltInSkills().map(x=>x.id));
 
 // English vocabulary targets and family-added words are content, not interface copy.
 export function skillText(item,t=x=>x){return /^(custom-|en-word-|en-red-)/.test(item.id)?item.label:t(item.label)}
+
+// Prefer the most advanced saved state when reading older overlapping checkboxes.
+export function mathStatus(value={}) {
+  return value.secure?'mastered':value.needsPractice?'practice':value.covered?'observed':'unchecked';
+}
+export function updateMathStatus(previous={},status,date) {
+  return {...previous,covered:status!=='unchecked',secure:status==='mastered',needsPractice:status==='practice',date,note:previous.note||''};
+}
+export function matchesMathStatus(value,filter) {
+  return filter==='all'||mathStatus(value)===filter;
+}
