@@ -81,3 +81,31 @@ Built-in image editing simplified the existing literary still life for icon use.
 Prompt:
 
 Refine this existing watercolor still life into a compact app-icon illustration, keeping the same ivory patterned teacup and saucer, muted blue top book, dusty plum lower book, cream page edges, and antique watercolor aesthetic and palette. Make the cup and books large, clear, centered and immediately recognizable. Simplify the plants drastically: retain just ONE small blue morning-glory blossom with mauve throat and two sage leaves beside the left base of the cup; remove all other flowers, extra vines, loose leaves, and the butterfly. The plant must support the cup, not dominate it. All cup handle, saucer and book edges fully within frame, generous clear transparent margin around the compact square composition. Preserve delicate watercolor translucency with warm parchment-ivory highlights, ink-blue and dusty-plum book covers; simplify tiny ornamental texture enough to stay clean at 180px. Transparent background. No text, lettering, signature, watermark, border, shadow or background rectangle. This artwork will occupy the top two-thirds of a parchment square, with real calligraphic name lettering added separately below.
+
+# Citrus & quiet wonder · approved concept implementation
+
+Built-in image generation used the approved concept board as a reference: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8cd39563/exec-a458cfc9-c4d6-4f10-b38b-4260b7814a2a.png`. Transparent assets were exported to WebP; the icon embeds PNG branch artwork and JPEG paper in its self-contained SVG source. Allura lettering is converted to outlines for the icon; its font and OFL license are self-hosted for the app. Prior art remains in repository history; active UI uses these citrus assets.
+
+## public/citrus-border.webp
+
+Source: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8cd39563/exec-08108aca-354e-41d3-b744-3cc5daabc0cc.png`
+
+Prompt:
+
+Produce ONLY the reusable watercolor botanical BORDER artwork from the approved reference concept, no phone, UI, icon, lettering, title, background or presentation board. A wide panoramic approximately 3:1 natural citrus border that will frame the bottom of an app's pale-blue day panel. A generous golden yellow-orange fruit among olive-green citrus leaves and white five-petalled blossoms at the lower LEFT, elegant leafy branches with several white blossoms extend across the lower edge to the lower right, with one delicate cream-and-brown butterfly above the right-hand blossoms. Match the approved concept's soft natural watercolor painting, luminous pale golden oranges, olive leaves, tiny white blossoms, muted warm browns. The upper central area must stay entirely transparent for text. All orange fruits fully inside the frame; do not cut off the main fruit. Organic irregular foliage tops, taller at sides and lower in middle. Real transparent alpha around the entire artwork. The reference is style and subject guidance, create a new matching arrangement. No books, teacup, purple flowers, grass, signatures or text.
+
+## public/citrus-branch.webp
+
+Source: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8cd39563/exec-a7446e41-afc4-40ff-8c08-441dfe003c1e.png`
+
+Prompt:
+
+Produce ONLY the original watercolor citrus branch artwork for the matching icon shown in the approved reference. No icon square, phone, UI, title, background or lettering. A compact graceful diagonal citrus branch bearing TWO luminous pale-golden oranges, a small restrained number of olive-green leaves, two or three tiny white citrus blossoms, and a small delicate cream butterfly with brown-edged wings just above and to the right. Match the concept's delicate traditional watercolor, soft edges, transparent pigment, natural botanical proportions and warm ivory highlights. Branch should fit comfortably in an approximately square composition, full fruit and butterfly visible, generous transparent margin, all objects connected visually as one elegant cluster. Genuinely transparent background. No books, teacup, morning glory, blue butterfly, signature, watermark, shadow or text. This asset will be centered on a pale powder-blue app icon with real calligraphic text added separately below.
+
+## public/citrus-paper.webp
+
+Source: `/Users/shereenng/.codex/generated_images/01a16bf6-afe1-7841-98d3-c25c8cd39563/exec-e1f46861-2951-4ea6-864f-fe837bed6060.png`
+
+Prompt:
+
+A quiet pale powder-blue watercolor paper texture for the background of a readable app panel and app icon. Flat overhead view, full bleed, no objects, no borders, no text, no plants, no shadows. Overall very light blue-grey approximately #e5edec, with extremely subtle natural watercolor pigment blooms and delicate ivory cotton paper fibers, soft low-contrast variation. Keep the entire field light and calm so dark brown text remains easy to read everywhere. No dark patches, no saturated blue, no gradient spotlight, no vignette, no stains. Landscape canvas.

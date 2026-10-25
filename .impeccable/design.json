@@ -1,26 +1,25 @@
 {
-  "name": "Wonder and Worship \u2014 literary botanical journal",
+  "name": "Wonder and Worship \u2014 Citrus & quiet wonder",
   "mode": "operate",
   "colors": {
-    "paper": "#f8efdf",
-    "card": "#fffaf0",
-    "ink": "#443e36",
-    "muted": "#716454",
-    "accent": "#3d5873",
-    "line": "#d9ccb9",
-    "covered": "#4b674e",
-    "today": "#f1e5d2",
-    "plum": "#735565"
+    "paper": "#faf6ed",
+    "card": "#fffdf6",
+    "ink": "#493b29",
+    "muted": "#6d634e",
+    "accent": "#59662d",
+    "line": "#ded5c1",
+    "covered": "#526534",
+    "today": "#e5edec"
   },
   "typography": {
-    "wordmark": "Courgette",
+    "wordmark": "Allura",
     "headings": "Fraunces",
     "body": "system sans serif"
   },
   "assets": [
-    "public/literary-table.webp",
-    "public/reading-garden-v2.webp",
-    "public/morning-glory.webp"
+    "public/citrus-border.webp",
+    "public/citrus-branch.webp",
+    "public/citrus-paper.webp"
   ],
   "constraints": [
     "Keep artwork outside controls and record content",
