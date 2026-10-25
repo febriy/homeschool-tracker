@@ -89,3 +89,6 @@ export const mathGroups=[
 ];
 export function allBuiltInSkills(){return [...englishGroups.flatMap(g=>g.items),...sageBooks.flatMap(g=>g.items),...mathGroups.flatMap(g=>g.items)]}
 export const skillIds=new Set(allBuiltInSkills().map(x=>x.id));
+
+// English vocabulary targets and family-added words are content, not interface copy.
+export function skillText(item,t=x=>x){return /^(custom-|en-word-|en-red-)/.test(item.id)?item.label:t(item.label)}
