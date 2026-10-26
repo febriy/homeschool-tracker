@@ -37,10 +37,10 @@ export function setupPhotos({getChild,childName,t,esc,announce,singaporeDay,date
     const bitmap=await createImageBitmap(file);
     try{const ratio=Math.min(1,1600/Math.max(bitmap.width,bitmap.height)),canvas=document.createElement('canvas');canvas.width=Math.max(1,Math.round(bitmap.width*ratio));canvas.height=Math.max(1,Math.round(bitmap.height*ratio));const context=canvas.getContext('2d');context.fillStyle='#fff';context.fillRect(0,0,canvas.width,canvas.height);context.drawImage(bitmap,0,0,canvas.width,canvas.height);const blob=await new Promise(resolve=>canvas.toBlob(resolve,'image/jpeg',.84));if(!blob||blob.size>3*1024*1024)throw Error(say('Try a smaller photo.','请尝试更小的照片。'));return blob}finally{bitmap.close()}
   }
-  function open(){
+  function open(context={}){
     $('photo-panel').hidden=false;$('new-photo').hidden=true;
-    if(!$('photo-file').files.length){$('photo-child').value=getChild();$('photo-date').value=singaporeDay();$('photo-status').textContent=''}
-    render();$('photo-date').max=singaporeDay();$('photo-panel').scrollIntoView({block:'start',behavior:'instant'});$('photo-child').focus({preventScroll:true});
+    if(!$('photo-file').files.length){$('photo-child').value=context.childId||getChild();$('photo-date').value=context.date||singaporeDay();$('photo-status').textContent=''}
+    render();if(context.subject&&!$('photo-file').files.length)$('photo-subject').value=context.subject;$('photo-date').max=singaporeDay();$('photo-panel').scrollIntoView({block:'start',behavior:'instant'});$('photo-child').focus({preventScroll:true});
   }
   $('new-photo').addEventListener('click',open);
   $('photo-gallery').addEventListener('click',async event=>{
@@ -78,7 +78,7 @@ export function setupPhotos({getChild,childName,t,esc,announce,singaporeDay,date
   for(const id of ['photo-group-by','photo-filter-subject'])$(id).addEventListener('change',render);
   $('photo-filter-subject').innerHTML='<option value="all">'+esc(t('All subjects'))+'</option>'+Object.entries(learningSubjects).map(([id,label])=>`<option value="${id}">${esc(label)}</option>`).join('');
   $('photo-subject').innerHTML=Object.entries(learningSubjects).map(([id,label])=>`<option value="${id}">${esc(label)}</option>`).join('');$('photo-subject').value='other';
-  render();return {render,refresh,getPhotos:()=>photos};
+  render();return {render,refresh,open,getPhotos:()=>photos};
 }
 
 export async function uploadLearningPhotos(files,details,{ids=new Map(),done=new Set(),onProgress=()=>{},t=x=>x}={}){

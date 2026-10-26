@@ -1,3 +1,4 @@
+import { playWeekDays } from './play-data.js';
 import { isAdult,learnerCurriculum,adultMandarin } from './curriculum.js';
 import { englishGroups,sageBooks,mathGroups,skillText,mathStatus } from './skill-data.js';
 export const learningSubjects={english:'English',mandarin:'Mandarin',math:'Math',bible:'Bible & worship',beauty:'Beauty loop',literature:'Literature',history:'History',geography:'Geography',nature:'Natural philosophy',other:'Life & learning'};
@@ -22,6 +23,7 @@ export function reviewLearning(records,child,days,photos=[],t=x=>x){
   function add(date,subject,id,detail){if(!calendar[date]||!learningSubjects[subject])return;const cell=calendar[date];const ids=cell.subjects[subject]??=new Set();if(id.startsWith('session:')||id.startsWith('entry:'))for(const previous of ids)if(previous.startsWith('coverage:')||previous.startsWith('checklist-'))ids.delete(previous);ids.add(id);if(detail)cell.details.push({subject,text:detail})}
   for(const [key,value] of Object.entries(records)){
     if(!value)continue;
+    if(key.startsWith('playweek:'+child+':'))for(const day of value.days||[])if(playWeekDays(key.split(':')[2]).includes(day))add(day,'other',key+':'+day,t('Play & discovery')+(value.observe||value.memory?' · '+(value.observe||value.memory):''));
     if((key.startsWith('session:')||key.startsWith('entry:'))&&value.childId===child)add(value.date,value.subject,key,value.lesson||(value.skillIds||[]).map(id=>skillLabel(id,records,child,t)).join(', ')||t('Subject practice'));
     if(key.startsWith('coverage:'+child+':')&&value===true){const parts=key.split(':');if(!calendar[parts[2]]?.subjects[parts[3]]?.size)add(parts[2],parts[3],key,t('Subject covered'))}
     if(key.startsWith('activity:'+child+':')&&value===true){const parts=key.split(':');add(parts[2],activitySubject[parts[3]],key,t([...learnerCurriculum(child).bible,...Object.values(learnerCurriculum(child).loops).flatMap(x=>x.items),...adultMandarin].find(x=>x.id===parts[3])?.title||parts[3]))}

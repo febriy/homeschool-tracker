@@ -1,6 +1,8 @@
 // Authored interface and teaching guidance. Learner input and original book titles stay unchanged.
 // Chinese verse source: https://www.biblegateway.com/passage/?search=Micah%206%3A8&version=CUVS
 export const zh = {
+  "Play":"游戏",
+  "Play & discovery":"游戏与探索",
   "“He has told you, O man, what is good; and what does the Lord require of you but to do justice, and to love kindness, and to walk humbly with your God?”":"“世人哪，耶和华已指示你何为善。他向你所要的是甚麽呢？只要你行公义，好怜悯，存谦卑的心，与你的神同行。”",
   "Micah 6:8 · ESV":"弥迦书 6:8 · 和合本",
   "{child}’s focus":"{child} 的学习重点",
