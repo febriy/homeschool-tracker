@@ -41,6 +41,9 @@ export function reviewLearning(records,child,days,photos=[],t=x=>x){
 
 export function learnerSubjects(child){return Object.fromEntries(Object.entries(learningSubjects).filter(([key])=>!isAdult(child)||!['english','math','geography','nature'].includes(key)))}
 
+// Attendance can include English without adding it to the adult lesson curriculum.
+export function attendanceSubjects(child){const subjects=learnerSubjects(child);return isAdult(child)?{english:learningSubjects.english,...subjects}:subjects}
+
 // A review never changes whether or when the book was read.
 export function updateBookReview(previous={},review,date) {
   return {...previous,read:previous.read??false,date:previous.date||date,rating:review.rating,recommendation:review.recommendation,comment:review.comment};

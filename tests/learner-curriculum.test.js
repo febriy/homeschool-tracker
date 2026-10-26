@@ -1,7 +1,7 @@
 import test from 'node:test';
 import assert from 'node:assert/strict';
 import { learnerCurriculum,adultMandarin,defaultRecords } from '../public/curriculum.js';
-import { checklistGroups,learnerSubjects,reviewLearning,periodDays } from '../public/learning-data.js';
+import { checklistGroups,learnerSubjects,attendanceSubjects,reviewLearning,periodDays } from '../public/learning-data.js';
 import { validateChildrenChanges } from '../lib/children-records.js';
 const session={childId:'parent',date:'2026-10-25',subject:'mandarin',skillIds:['activity-podcast','activity-zaobao','activity-preply'],note:'',outcome:'completed',createdAt:'2026-10-25T01:00:00Z'};
 test('parent has an independent supplied curriculum while children retain their plan',()=>{
@@ -31,4 +31,14 @@ test('country books are bounded, learner-specific, and contribute to history rev
  assert.equal(review.subjects.history.days,1);assert.equal(review.subjects.mandarin.days,1);assert.equal(review.subjects.beauty.days,0);
  assert.equal(reviewLearning(records,'child-a',days).subjects.history.days,0);
  assert.match(review.calendar['2026-10-25'].details.find(x=>x.subject==='mandarin'&&x.text.includes('Preply')).text,/Preply/);
+});
+
+test('adult attendance includes English without changing the adult lesson curriculum',()=>{
+ assert.equal(attendanceSubjects('parent').english,'English');
+ assert.equal(Object.hasOwn(learnerSubjects('parent'),'english'),false);
+ const records={'coverage:parent:2026-10-26:english':true};
+ const review=reviewLearning(records,'parent',periodDays('2026-10-26'));
+ assert.equal(review.subjects.english.days,1);
+ assert.deepEqual(review.attendance,['2026-10-26']);
+ assert.equal(reviewLearning(records,'ethan',periodDays('2026-10-26')).subjects.english.days,0);
 });
