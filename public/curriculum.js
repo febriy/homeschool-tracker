@@ -55,7 +55,8 @@ export const adultLoops={
     {id:'northanger',title:'Northanger Abbey',detail:'Continue from your last reading.'},
     {id:'austen-bookshelf',title:'Jane Austen’s Bookshelf',detail:'Continue from your last reading.'}
   ]},
-  history:{title:'History',description:'Connect your BiblioPlan study with country reading.',items:[{id:'biblioplan',title:'BiblioPlan',detail:'Continue the next history study.'}]}
+  history:{title:'History',description:'Connect your BiblioPlan study with country reading.',items:[{id:'biblioplan',title:'BiblioPlan',detail:'Continue the next history study.'}]},
+  philosophy:{title:'Educational philosophy',description:'Read, reflect, and bring an idea into your home.',items:[{id:'charlotte-volume-1',title:'Charlotte Mason · Volume 1',detail:'Continue from your last reading.'}]}
 };
 export const isAdult=id=>id==='parent';
 export function learnerCurriculum(id){return isAdult(id)?{bible:adultBible,subjects:{mandarin:{title:'Mandarin',curriculum:'Podcasts · 联合早报 · Preply'}},loops:adultLoops}:{bible,subjects,loops}}

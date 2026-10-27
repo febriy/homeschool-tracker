@@ -1,7 +1,7 @@
 import { playWeekDays } from './play-data.js';
 import { isAdult,learnerCurriculum,adultMandarin } from './curriculum.js';
 import { englishGroups,sageBooks,mathGroups,skillText,mathStatus } from './skill-data.js';
-export const learningSubjects={english:'English',mandarin:'Mandarin',math:'Math',bible:'Bible & worship',beauty:'Beauty loop',literature:'Literature',history:'History',geography:'Geography',nature:'Natural philosophy',other:'Life & learning'};
+export const learningSubjects={english:'English',mandarin:'Mandarin',math:'Math',bible:'Bible & worship',beauty:'Beauty loop',literature:'Literature',history:'History',geography:'Geography',nature:'Natural philosophy',other:'Life & learning',philosophy:'Educational philosophy'};
 export function checklistGroups(subject,records={},child='together'){
   if(isAdult(child)){const plan=learnerCurriculum(child),items=subject==='mandarin'?adultMandarin:subject==='bible'?plan.bible:plan.loops[subject]?.items||(subject==='other'?[{id:'other',title:'Life & learning'}]:[]);return [{id:subject,title:learningSubjects[subject],items:items.map(x=>({id:'activity-'+x.id,label:x.title}))}]}
   if(subject==='mandarin')return sageBooks;
@@ -17,7 +17,7 @@ export function periodDays(date,period='week'){
   const end=new Date(start);if(period==='month')end.setUTCMonth(end.getUTCMonth()+1);else end.setUTCDate(end.getUTCDate()+7);
   const days=[];for(const d=new Date(start);d<end;d.setUTCDate(d.getUTCDate()+1))days.push(d.toISOString().slice(0,10));return days;
 }
-const activitySubject={ 'bible-story':'bible','without-doors':'bible',hymn:'bible',scripture:'bible',catechism:'bible',artist:'beauty',composer:'beauty',poet:'beauty',drawing:'beauty',handicraft:'beauty',literature:'literature',biblioplan:'history',atlas:'geography','new-testament':'bible','spck-atlas':'bible','psalms-proverbs':'bible',podcast:'mandarin',zaobao:'mandarin',preply:'mandarin',piano:'beauty',northanger:'literature','austen-bookshelf':'literature'};
+const activitySubject={ 'bible-story':'bible','without-doors':'bible',hymn:'bible',scripture:'bible',catechism:'bible',artist:'beauty',composer:'beauty',poet:'beauty',drawing:'beauty',handicraft:'beauty',literature:'literature',biblioplan:'history',atlas:'geography','new-testament':'bible','spck-atlas':'bible','psalms-proverbs':'bible',podcast:'mandarin',zaobao:'mandarin',preply:'mandarin',piano:'beauty','charlotte-volume-1':'philosophy',northanger:'literature','austen-bookshelf':'literature'};
 export function reviewLearning(records,child,days,photos=[],t=x=>x){
   const calendar=Object.fromEntries(days.map(day=>[day,{subjects:{},details:[],photos:[]}])) ;
   function add(date,subject,id,detail){if(!calendar[date]||!learningSubjects[subject])return;const cell=calendar[date];const ids=cell.subjects[subject]??=new Set();if(id.startsWith('session:')||id.startsWith('entry:'))for(const previous of ids)if(previous.startsWith('coverage:')||previous.startsWith('checklist-'))ids.delete(previous);ids.add(id);if(detail)cell.details.push({subject,text:detail})}
@@ -39,7 +39,7 @@ export function reviewLearning(records,child,days,photos=[],t=x=>x){
   return {calendar,attendance,subjects};
 }
 
-export function learnerSubjects(child){return Object.fromEntries(Object.entries(learningSubjects).filter(([key])=>!isAdult(child)||!['english','math','geography','nature'].includes(key)))}
+export function learnerSubjects(child){return Object.fromEntries(Object.entries(learningSubjects).filter(([key])=>isAdult(child)?!['english','math','geography','nature'].includes(key):key!=='philosophy'))}
 
 // Attendance can include English without adding it to the adult lesson curriculum.
 export function attendanceSubjects(child){const subjects=learnerSubjects(child);return isAdult(child)?{english:learningSubjects.english,...subjects}:subjects}

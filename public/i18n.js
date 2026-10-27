@@ -1,6 +1,8 @@
 // Authored interface and teaching guidance. Learner input and original book titles stay unchanged.
 // Chinese verse source: https://www.biblegateway.com/passage/?search=Micah%206%3A8&version=CUVS
 export const zh = {
+"Beauty, literature, history, then educational philosophy. Move at your own pace.":"美、文学、历史，再到教育哲学，按照自己的节奏继续。",
+"Educational philosophy":"教育哲学","Charlotte Mason · Volume 1":"夏洛特·梅森 · 第一卷","Read, reflect, and bring an idea into your home.":"阅读、思考，将一个理念带入家庭。","Reading progress":"阅读进度","Set the total pages or chapters for your edition.":"请按你使用的版本设置总页数或总章数。","Update reading progress":"更新阅读进度","Read so far":"已读","Total":"总数","Track by":"记录单位","Pages":"页数","Chapters":"章数","pages":"页","chapters":"章","Save reading progress":"保存阅读进度","Reading progress saved.":"阅读进度已保存。","Not saved yet":"尚未保存","Your books · reading progress":"我的书单 · 阅读进度","{current} of {total} {unit}":"已读 {current} / {total} {unit}","Enter a total greater than zero and a reading position within that total.":"总数须大于零，已读数不能超过总数。","Books of Psalms":"诗篇","Books of Proverbs":"箴言",
   "Play":"游戏",
   "Play & discovery":"游戏与探索",
   "“He has told you, O man, what is good; and what does the Lord require of you but to do justice, and to love kindness, and to walk humbly with your God?”":"“世人哪，耶和华已指示你何为善。他向你所要的是甚麽呢？只要你行公义，好怜悯，存谦卑的心，与你的神同行。”",
