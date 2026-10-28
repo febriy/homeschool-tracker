@@ -1,6 +1,8 @@
 // Authored interface and teaching guidance. Learner input and original book titles stay unchanged.
 // Chinese verse source: https://www.biblegateway.com/passage/?search=Micah%206%3A8&version=CUVS
 export const zh = {
+"No skills to revise here. Show mastered skills or choose another section.":"这里没有待复习的技能。可显示已掌握的技能，或选择其他分类。",
+"Still practising":"仍在练习","Show mastered skills":"显示已掌握的技能","Newly introduced and still-practising skills stay here. Mastered skills are hidden unless you choose to show them.":"刚开始接触和仍在练习的技能会保留在这里。已掌握的技能默认隐藏，可选择显示。","Choose Newly introduced, Still practising, or Mastered for each skill. Mastered skills stay here and are hidden by default when recording a lesson.":"为每项技能选择刚开始接触、仍在练习或已掌握。已掌握的技能会保留在本清单，在记录课次时默认隐藏。",
 "Newly introduced":"刚开始接触",
 "Skill status":"技能状态",
 "Skill status saves immediately for the learner selected above. Tick a skill to include it in this lesson.":"技能状态会立即保存给上方所选的学习者。勾选技能可将其加入本次课次。",
@@ -682,7 +684,7 @@ export const zh = {
   "Some editions use variants such as 甚/什 and 裏/里; use the matching lesson checkbox for your edition.": "不同版本可能使用甚／什、裏／里等异体或用字，请勾选与你的版本对应的课次。",
   "Publisher’s character chart (page 5)": "出版社汉字表（第 5 页）",
   "Sagebooks Level 1": "思展 Sagebooks 第一级",
-  "NCETM’s six Early Years areas organise this checklist. NEL references point to the 2022 Singapore preschool numeracy goals. “Direct” means the skill addresses a listed goal; “Related” is a practical connection; “Extension” has no direct listed NEL goal. This crosswalk and the observation examples are parent-facing interpretations, not an official joint standard. Newly introduced means you have started exploring the skill; Need practice means it still needs support; Mastered means independent, repeatable use. Choose one current status. Montessori suggestions are practical links, not an official framework alignment.": "本清单按 NCETM 的六个幼儿数学领域整理，NEL 编号对应新加坡 2022 年学前数学目标。“直接对应”表示此技能落实所列目标；“相关”表示实践上的联系；“拓展”表示没有直接对应的 NEL 目标。此对照及观察示例是供家长使用的解读，并非官方联合标准。“刚开始接触”表示已开始探索此技能；“需要练习”表示仍需支持；“已掌握”表示能独立且多次稳定完成。每项技能选择一个当前状态。蒙特梭利材料建议是实用参考，并非官方框架对应。",
+  "NCETM’s six Early Years areas organise this checklist. NEL references point to the 2022 Singapore preschool numeracy goals. “Direct” means the skill addresses a listed goal; “Related” is a practical connection; “Extension” has no direct listed NEL goal. This crosswalk and the observation examples are parent-facing interpretations, not an official joint standard. Newly introduced means you have started exploring the skill; Still practising means it still needs support; Mastered means independent, repeatable use. Choose one current status. Montessori suggestions are practical links, not an official framework alignment.": "本清单按 NCETM 的六个幼儿数学领域整理，NEL 编号对应新加坡 2022 年学前数学目标。“直接对应”表示此技能落实所列目标；“相关”表示实践上的联系；“拓展”表示没有直接对应的 NEL 目标。此对照及观察示例是供家长使用的解读，并非官方联合标准。“刚开始接触”表示已开始探索此技能；“仍在练习”表示仍需支持；“已掌握”表示能独立且多次稳定完成。每项技能选择一个当前状态。蒙特梭利材料建议是实用参考，并非官方框架对应。",
   "MOE NEL numeracy goals": "新加坡教育部 NEL 数学目标",
   "MOE 2022 educators’ guide": "教育部 2022 年教师指南",
   "NCETM Early Years": "NCETM 幼儿数学",

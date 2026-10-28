@@ -126,3 +126,5 @@ nav{background:#faf6ed}nav button{display:flex;flex-direction:column;align-items
 .study-row>.reading-progress{align-self:stretch;min-width:0}.study-row>.reading-progress-book-title{align-self:stretch}
 
 .lesson-math-status{margin:12px 0 10px 36px;max-width:360px}.lesson-math-status label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}.lesson-math-status select{width:100%;min-height:44px;font-size:16px}@media(max-width:400px){.lesson-math-status{margin-left:0}}
+
+.math-status-options{display:block;max-width:360px}.math-status-options>label{display:block;margin:8px 0 6px;font-size:13px}.math-status-options select,.letter-statuses select{width:100%;min-height:44px;font-size:16px}.letter-statuses{display:grid!important;grid-template-columns:1fr 1fr;gap:12px!important}.letter-statuses>div{min-width:0}.letter-statuses label{font-size:13px;margin-bottom:6px;display:block}.letter-row{min-width:0}@media(max-width:450px){.letter-statuses{grid-template-columns:1fr}.letter-row{grid-template-columns:42px minmax(0,1fr)}}

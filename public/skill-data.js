@@ -103,3 +103,6 @@ export function updateMathStatus(previous={},status,date) {
 export function matchesMathStatus(value,filter) {
   return filter==='all'||mathStatus(value)===filter;
 }
+
+export const skillStatusLabels={unchecked:'Not checked at all',observed:'Newly introduced',practice:'Still practising',mastered:'Mastered'};
+export function revisionItems(items,records,child,subject,{includeMastered=false,editingIds=[]}={}){return !['english','math'].includes(subject)||includeMastered?items:items.filter(item=>mathStatus(records[`skill:${child}:${item.id}`]||{})!=='mastered'||editingIds.includes(item.id))}

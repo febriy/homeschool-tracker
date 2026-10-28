@@ -62,3 +62,20 @@ test('math has one current status, preserves older progress and treats practice-
   assert.equal(matchesMathStatus({covered:false,needsPractice:true},'unchecked'),false);
   assert.equal(previous.needsPractice,true);
 });
+
+test('English and maths revision lists keep introduced/practising skills until mastered, per learner',async()=>{
+ const {revisionItems,updateMathStatus,mathStatus}=await import('../public/skill-data.js');
+ const items=[{id:'en-word-the'},{id:'en-word-you'},{id:'en-word-they'},{id:'en-word-of'}];
+ const records={'skill:carisa:en-word-the':{covered:true,date:'2026-10-28',note:''},'skill:carisa:en-word-you':{covered:true,needsPractice:true,date:'2026-10-28',note:''},'skill:carisa:en-word-they':{covered:true,secure:true,date:'2026-10-28',note:''}};
+ assert.equal(mathStatus(records['skill:carisa:en-word-the']),'observed');
+ for(const subject of ['english','math']){
+  assert.deepEqual(revisionItems(items,records,'carisa',subject).map(x=>x.id),['en-word-the','en-word-you','en-word-of']);
+  assert.equal(revisionItems(items,records,'ethan',subject).length,4);
+  assert.equal(revisionItems(items,records,'carisa',subject,{includeMastered:true}).length,4);
+  assert.equal(revisionItems(items,records,'carisa',subject,{editingIds:['en-word-they']}).length,4);
+ }
+ const revised=updateMathStatus(records['skill:carisa:en-word-they'],'practice','2026-10-28');
+ assert.equal(mathStatus(revised),'practice');assert.equal(revised.secure,false);
+ assert.equal(revisionItems(items,records,'carisa','mandarin').length,4);
+ assert.equal(validateChildrenChanges([{key:'skill:carisa:en-word-the',value:updateMathStatus(records['skill:carisa:en-word-the'],'mastered','2026-10-28')}]),true);
+});
