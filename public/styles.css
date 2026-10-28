@@ -124,3 +124,5 @@ nav{background:#faf6ed}nav button{display:flex;flex-direction:column;align-items
 .reading-progress-book-title{margin:16px 0 0 36px;font-size:15px;font-weight:600}
 
 .study-row>.reading-progress{align-self:stretch;min-width:0}.study-row>.reading-progress-book-title{align-self:stretch}
+
+.lesson-math-status{margin:12px 0 10px 36px;max-width:360px}.lesson-math-status label{display:block;font-size:13px;font-weight:600;margin-bottom:6px}.lesson-math-status select{width:100%;min-height:44px;font-size:16px}@media(max-width:400px){.lesson-math-status{margin-left:0}}

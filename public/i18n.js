@@ -1,6 +1,9 @@
 // Authored interface and teaching guidance. Learner input and original book titles stay unchanged.
 // Chinese verse source: https://www.biblegateway.com/passage/?search=Micah%206%3A8&version=CUVS
 export const zh = {
+"Newly introduced":"刚开始接触",
+"Skill status":"技能状态",
+"Skill status saves immediately for the learner selected above. Tick a skill to include it in this lesson.":"技能状态会立即保存给上方所选的学习者。勾选技能可将其加入本次课次。",
 "Beauty, literature, history, then educational philosophy. Move at your own pace.":"美、文学、历史，再到教育哲学，按照自己的节奏继续。",
 "Educational philosophy":"教育哲学","Charlotte Mason · Volume 1":"夏洛特·梅森 · 第一卷","Read, reflect, and bring an idea into your home.":"阅读、思考，将一个理念带入家庭。","Reading progress":"阅读进度","Set the total pages or chapters for your edition.":"请按你使用的版本设置总页数或总章数。","Update reading progress":"更新阅读进度","Read so far":"已读","Total":"总数","Track by":"记录单位","Pages":"页数","Chapters":"章数","pages":"页","chapters":"章","Save reading progress":"保存阅读进度","Reading progress saved.":"阅读进度已保存。","Not saved yet":"尚未保存","Your books · reading progress":"我的书单 · 阅读进度","{current} of {total} {unit}":"已读 {current} / {total} {unit}","Enter a total greater than zero and a reading position within that total.":"总数须大于零，已读数不能超过总数。","Books of Psalms":"诗篇","Books of Proverbs":"箴言",
   "Play":"游戏",
@@ -41,7 +44,7 @@ export const zh = {
   "Mastered":"已掌握",
   "Not checked at all":"尚未勾选",
   "assessed":"已记录",
-  "Choose one status for each skill: I’ve observed it, Need practice, or Mastered. Untick it to leave the skill unchecked. Open the guidance for examples and notes.":"为每项技能选择一个状态：我已观察到、需要练习或已掌握。取消勾选即可恢复为尚未勾选。展开指引可查看示例和笔记。",
+  "Choose one status for each skill: Newly introduced, Need practice, or Mastered. Untick it to leave the skill unchecked. Open the guidance for examples and notes.":"为每项技能选择一个状态：刚开始接触、需要练习或已掌握。取消勾选即可恢复为尚未勾选。展开指引可查看示例和笔记。",
   "Yeo family · Learning together": "Yeo 家庭 · 一起学习",
   "One shared tracker · no sign-in needed": "共享学习记录 · 无需登录",
   "Recording for": "记录对象",
@@ -679,7 +682,7 @@ export const zh = {
   "Some editions use variants such as 甚/什 and 裏/里; use the matching lesson checkbox for your edition.": "不同版本可能使用甚／什、裏／里等异体或用字，请勾选与你的版本对应的课次。",
   "Publisher’s character chart (page 5)": "出版社汉字表（第 5 页）",
   "Sagebooks Level 1": "思展 Sagebooks 第一级",
-  "NCETM’s six Early Years areas organise this checklist. NEL references point to the 2022 Singapore preschool numeracy goals. “Direct” means the skill addresses a listed goal; “Related” is a practical connection; “Extension” has no direct listed NEL goal. This crosswalk and the observation examples are parent-facing interpretations, not an official joint standard. Observed means you have seen the skill; Need practice means it still needs support; Mastered means independent, repeatable use. Choose one current status. Montessori suggestions are practical links, not an official framework alignment.": "本清单按 NCETM 的六个幼儿数学领域整理，NEL 编号对应新加坡 2022 年学前数学目标。“直接对应”表示此技能落实所列目标；“相关”表示实践上的联系；“拓展”表示没有直接对应的 NEL 目标。此对照及观察示例是供家长使用的解读，并非官方联合标准。“已观察到”表示见过孩子运用此技能；“需要练习”表示仍需支持；“已掌握”表示能独立且多次稳定完成。每项技能选择一个当前状态。蒙特梭利材料建议是实用参考，并非官方框架对应。",
+  "NCETM’s six Early Years areas organise this checklist. NEL references point to the 2022 Singapore preschool numeracy goals. “Direct” means the skill addresses a listed goal; “Related” is a practical connection; “Extension” has no direct listed NEL goal. This crosswalk and the observation examples are parent-facing interpretations, not an official joint standard. Newly introduced means you have started exploring the skill; Need practice means it still needs support; Mastered means independent, repeatable use. Choose one current status. Montessori suggestions are practical links, not an official framework alignment.": "本清单按 NCETM 的六个幼儿数学领域整理，NEL 编号对应新加坡 2022 年学前数学目标。“直接对应”表示此技能落实所列目标；“相关”表示实践上的联系；“拓展”表示没有直接对应的 NEL 目标。此对照及观察示例是供家长使用的解读，并非官方联合标准。“刚开始接触”表示已开始探索此技能；“需要练习”表示仍需支持；“已掌握”表示能独立且多次稳定完成。每项技能选择一个当前状态。蒙特梭利材料建议是实用参考，并非官方框架对应。",
   "MOE NEL numeracy goals": "新加坡教育部 NEL 数学目标",
   "MOE 2022 educators’ guide": "教育部 2022 年教师指南",
   "NCETM Early Years": "NCETM 幼儿数学",
