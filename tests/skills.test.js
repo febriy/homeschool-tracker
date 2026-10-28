@@ -79,3 +79,15 @@ test('English and maths revision lists keep introduced/practising skills until m
  assert.equal(revisionItems(items,records,'carisa','mandarin').length,4);
  assert.equal(validateChildrenChanges([{key:'skill:carisa:en-word-the',value:updateMathStatus(records['skill:carisa:en-word-the'],'mastered','2026-10-28')}]),true);
 });
+
+test('phonemic awareness can be recorded as English skills without conflating letter sounds',async()=>{
+ const {updateMathStatus}=await import('../public/skill-data.js');
+ const group=englishGroups.find(group=>group.id==='phonemic');
+ assert.equal(group.items.length,15);
+ for(const item of group.items){
+  assert.ok(item.id.startsWith('en-pa-'));
+  assert.equal(validateChildrenChanges([{key:`skill:carisa:${item.id}`,value:updateMathStatus({},'practice','2026-10-28')}]),true);
+ }
+ assert.equal(validateChildrenChanges([{key:'session:phonemic-test',value:{childId:'carisa',date:'2026-10-28',subject:'english',skillIds:group.items.map(item=>item.id),note:'Spoken sounds',outcome:'practised',createdAt:'2026-10-28T10:00:00Z'}}]),true);
+ assert.equal(new Set([...englishGroups.flatMap(g=>g.items)].map(item=>item.id)).size,englishGroups.flatMap(g=>g.items).length);
+});

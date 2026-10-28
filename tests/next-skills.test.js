@@ -46,3 +46,20 @@ test('together view gives each child their own focus, excluding shared and adult
  assert.deepEqual(subjectFocus('english',records,'parent'),[]);
  assert.deepEqual(subjectFocus('english',{},'together'),[]);
 });
+
+test('front-page practice lists include every practising skill and preserve child boundaries',async()=>{
+ const {subjectFocus}=await import('../public/learning-data.js');
+ const {englishGroups,mathGroups}=await import('../public/skill-data.js');
+ const records={'profile:carisa':{name:'Carisa'},'profile:ethan':{name:'Ethan'}};
+ const english=englishGroups.flatMap(group=>group.items),math=mathGroups.flatMap(group=>group.items);
+ for(const item of english.slice(0,12))records[`skill:carisa:${item.id}`]={covered:true,needsPractice:true};
+ records[`skill:carisa:${english[12].id}`]={covered:true,secure:true};
+ records[`skill:carisa:${english[13].id}`]={covered:true};
+ records[`skill:ethan:${english[14].id}`]={covered:true,needsPractice:true};
+ for(const item of math.slice(0,8))records[`skill:carisa:${item.id}`]={covered:true,needsPractice:true};
+ const focus=subjectFocus('english',records,'together');
+ assert.deepEqual(focus[0].practisingGroups.flatMap(group=>group.items).map(item=>item.id),english.slice(0,12).map(item=>item.id));
+ assert.deepEqual(focus[1].practisingGroups.flatMap(group=>group.items).map(item=>item.id),[english[14].id]);
+ assert.equal(subjectFocus('math',records,'carisa')[0].practisingGroups.flatMap(group=>group.items).length,8);
+ assert.equal(subjectFocus('english',{},'ethan')[0].practisingGroups.length,0);
+});

@@ -65,9 +65,10 @@ export function subjectFocus(subject,records={},activeChild='together') {
   if(isAdult(activeChild))return [];
   const learners=activeChild==='together'?Object.entries(records).filter(([key,value])=>key.startsWith('profile:')&&value&&key!=='profile:together'&&!isAdult(key.slice(8))).map(([key,value])=>({id:key.slice(8),name:value.name})):[{id:activeChild,name:records['profile:'+activeChild]?.name||activeChild}];
   return learners.map(learner=>{
-    const items=checklistGroups(subject,records,learner.id).flatMap(group=>group.items),state=item=>records[`skill:${learner.id}:${item.id}`]||{};
+    const groups=checklistGroups(subject,records,learner.id),items=groups.flatMap(group=>group.items),state=item=>records[`skill:${learner.id}:${item.id}`]||{};
     const covered=items.filter(item=>subject==='math'?mathStatus(state(item))!=='unchecked':state(item).covered).length;
     const next=subject==='math'?items.find(item=>mathStatus(state(item))==='practice')||items.find(item=>mathStatus(state(item))==='unchecked')||items.find(item=>mathStatus(state(item))==='observed'):null;
-    return {...learner,covered,total:items.length,next,...nextLanguageSkills(subject,records,learner.id)};
+    const practisingGroups=groups.map(group=>({id:group.id,title:group.title,items:group.items.filter(item=>mathStatus(state(item))==='practice')})).filter(group=>group.items.length);
+    return {...learner,covered,total:items.length,next,practisingGroups,...nextLanguageSkills(subject,records,learner.id)};
   });
 }
