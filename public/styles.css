@@ -132,3 +132,5 @@ nav{background:#faf6ed}nav button{display:flex;flex-direction:column;align-items
 .practice-focus{margin-top:18px}.practice-focus h5{display:flex;align-items:center;gap:12px;font:600 17px/1.5 system-ui,sans-serif;margin:0 0 12px;color:var(--accent)}.practice-focus-group{margin:16px 0}.practice-focus h6{font:600 14px/1.5 system-ui,sans-serif;margin:0 0 7px;color:var(--muted)}.practice-focus ul{padding-left:22px;margin:0;columns:auto;list-style:disc}.practice-focus li{font-size:16px;line-height:1.7;margin:3px 0;overflow-wrap:anywhere}
 
 #backups-view>p{line-height:1.7;margin:18px 0;max-width:70ch}#backup-status{color:var(--accent);font-size:15px}#backup-summary{overflow-wrap:anywhere;font-size:14px}#backup-ready{border-block:1px solid var(--line);padding:18px 0;margin:24px 0}#backup-ready .form-actions{flex-wrap:wrap;gap:12px}#backup-create{margin:16px 0}.shared-bar .backup-shortcut{display:block;padding:5px 0;min-height:44px;text-align:left;font-size:13px}
+
+#backup-download{text-decoration:none;display:inline-flex;align-items:center}
