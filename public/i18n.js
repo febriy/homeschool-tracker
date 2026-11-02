@@ -308,6 +308,8 @@ export const zh = {
   "George Frideric Handel": "乔治·弗里德里克·亨德尔",
   "Emily Dickinson": "艾米莉·狄金森",
   "Books we read today": "今天读过的书",
+  "Type any book title": "输入任何书名",
+  "Type any book title, including your own books. It does not need to be on the Literary Ladder.": "可以输入任何书名，包括您自己的书，不必在文学阶梯书单中。",
   "{child} · {date} · Fill any of the {count} spaces. None are required.": "{child} · {date} · 共 {count} 个空格，全部选填。",
   "Book {number} (optional)": "第 {number} 本书（可选）",
   "Save books read": "保存阅读书目",
