@@ -1,3 +1,5 @@
+import {personalEducation,seasonalActivities} from './adult-season.js';
+export {educationWeeks,seasonalActivities} from './adult-season.js';
 export const subjects = {
   english: {title:'English', curriculum:'Alana’s manual', hint:'Lesson, page, or skill', example:'e.g. Lesson 12 · letter sounds'},
   mandarin: {title:'Mandarin', curriculum:'Sagebooks', hint:'Set, book, lesson, or characters', example:'e.g. Set 1, Book 2 · Lesson 4'},
@@ -59,5 +61,6 @@ export const adultLoops={
   philosophy:{title:'Educational philosophy',description:'Read, reflect, and bring an idea into your home.',items:[{id:'charlotte-volume-1',title:'Charlotte Mason · Volume 1',detail:'Continue from your last reading.'}]}
 };
 export const isAdult=id=>id==='parent';
-export function learnerCurriculum(id){return isAdult(id)?{bible:adultBible,subjects:{mandarin:{title:'Mandarin',curriculum:'Podcasts · 联合早报 · Preply'}},loops:adultLoops}:{bible,subjects,loops}}
-export const activityIds=[...new Set([...bible,...Object.values(loops).flatMap(x=>x.items),...adultBible,...adultMandarin,...Object.values(adultLoops).flatMap(x=>x.items)].map(x=>x.id))];
+export function learnerCurriculum(id,date=singaporeDay()){if(!isAdult(id))return {bible,subjects,loops};const base={bible:adultBible,subjects:{mandarin:{title:'Mandarin',curriculum:'Podcasts · 联合早报 · Preply'}},loops:adultLoops},season=personalEducation(date,base);return season?{...base,bible:season.bible,loops:season.loops,education:season.week}:base}
+export const adultActivityArchive={bible:adultBible,...Object.fromEntries(Object.entries(adultLoops).map(([key,loop])=>[key,loop.items]))};
+export const activityIds=[...new Set([...Object.values(seasonalActivities).flat(),...bible,...Object.values(loops).flatMap(x=>x.items),...adultBible,...adultMandarin,...Object.values(adultLoops).flatMap(x=>x.items)].map(x=>x.id))];

@@ -11,7 +11,7 @@ export function setupLearning({getRecords,put,getChild,childName,t,esc,announce,
   const options=Object.entries(learningSubjects).map(([id,title])=>`<option value="${id}">${esc(t(title))}</option>`).join('');
   $('entry-subject').innerHTML=options;$('filter-subject').innerHTML='<option value="all">'+esc(t('All subjects'))+'</option>'+options;
   function subjectOptions(){const previous=$('entry-subject').value,child=$('entry-child').value||getChild();$('entry-subject').innerHTML=Object.entries(learnerSubjects(child)).map(([id,title])=>`<option value="${id}">${esc(t(title))}</option>`).join('');$('entry-subject').value=Object.hasOwn(learnerSubjects(child),previous)?previous:isAdult(child)?'mandarin':'english';const filter=$('filter-subject').value;$('filter-subject').innerHTML='<option value="all">'+esc(t('All subjects'))+'</option>'+Object.entries(learnerSubjects(getChild())).map(([id,title])=>`<option value="${id}">${esc(t(title))}</option>`).join('');$('filter-subject').value=[...$('filter-subject').options].some(x=>x.value===filter)?filter:'all'}
-  function groups(){return checklistGroups($('entry-subject').value,getRecords(),$('entry-child').value)}
+  function groups(){return checklistGroups($('entry-subject').value,getRecords(),$('entry-child').value,$('entry-date').value||singaporeDay())}
   function renderPicker(reset=false){
     const all=groups(),previous=$('session-group').value;
     if(reset||all.length){$('session-group').innerHTML=all.map(g=>`<option value="${g.id}">${esc(t(g.title))}</option>`).join('');$('session-group').value=all.some(g=>g.id===previous)?previous:all[0]?.id;if(reset)$('session-search').value=''}
@@ -83,6 +83,7 @@ export function setupLearning({getRecords,put,getChild,childName,t,esc,announce,
   $('new-entry').addEventListener('click',()=>open());$('cancel-entry').addEventListener('click',close);$('record-form').addEventListener('submit',save);
   $('session-show-mastered').addEventListener('change',()=>renderPicker());
   for(const id of ['session-group','session-search'])$(id).addEventListener(id==='session-search'?'input':'change',()=>renderPicker());
+  $('entry-date').addEventListener('change',()=>renderPicker());
   $('entry-subject').addEventListener('change',()=>{selected.clear();renderPicker(true)});$('entry-child').addEventListener('change',()=>{subjectOptions();selected.clear();renderPicker(true)});
   $('session-options').addEventListener('change',event=>{if(!event.target.matches('[data-session-skill]'))return;event.target.checked?selected.add(event.target.dataset.sessionSkill):selected.delete(event.target.dataset.sessionSkill);$('session-count').textContent=t('{count} items selected · {child}',{count:selected.size,child:childName($('entry-child').value)})});
   $('progress-photo').addEventListener('change',()=>{release();uploadIds.clear();uploaded.clear();$('progress-previews').innerHTML=[...$('progress-photo').files].slice(0,10).map(file=>{const url=URL.createObjectURL(file);previewURLs.push(url);return `<figure><img src="${url}" alt="${esc(file.name)}"><figcaption>${esc(file.name)}</figcaption></figure>`}).join('')});

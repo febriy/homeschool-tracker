@@ -134,3 +134,9 @@ nav{background:#faf6ed}nav button{display:flex;flex-direction:column;align-items
 #backups-view>p{line-height:1.7;margin:18px 0;max-width:70ch}#backup-status{color:var(--accent);font-size:15px}#backup-summary{overflow-wrap:anywhere;font-size:14px}#backup-ready{border-block:1px solid var(--line);padding:18px 0;margin:24px 0}#backup-ready .form-actions{flex-wrap:wrap;gap:12px}#backup-create{margin:16px 0}.shared-bar .backup-shortcut{display:block;padding:5px 0;min-height:44px;text-align:left;font-size:13px}
 
 #backup-download{text-decoration:none;display:inline-flex;align-items:center}
+
+.personal-education{padding-block:1.75rem;border-bottom:1px solid var(--border,#ded5c1)}
+.personal-education>p{max-width:65ch}
+.education-schedule{padding-inline-start:1.4rem;max-width:70ch}
+.education-schedule li{padding-block:.75rem;border-bottom:1px solid var(--border,#ded5c1)}
+.education-schedule li p{margin:.4rem 0 0}

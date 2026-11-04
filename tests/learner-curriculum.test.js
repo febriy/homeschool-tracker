@@ -5,7 +5,7 @@ import { checklistGroups,learnerSubjects,attendanceSubjects,reviewLearning,perio
 import { validateChildrenChanges } from '../lib/children-records.js';
 const session={childId:'parent',date:'2026-10-25',subject:'mandarin',skillIds:['activity-podcast','activity-zaobao','activity-preply'],note:'',outcome:'completed',createdAt:'2026-10-25T01:00:00Z'};
 test('parent has an independent supplied curriculum while children retain their plan',()=>{
- const parent=learnerCurriculum('parent'),child=learnerCurriculum('child-a');
+ const parent=learnerCurriculum('parent','2026-10-25'),child=learnerCurriculum('child-a');
  assert.equal(defaultRecords()['profile:parent'].name,'My learning');
  assert.deepEqual(Object.keys(parent.subjects),['mandarin']);assert.deepEqual(Object.keys(child.subjects),['english','mandarin','math']);
  assert.deepEqual(parent.bible.map(x=>x.id),['new-testament','spck-atlas','hymn','without-doors','psalms-proverbs']);
