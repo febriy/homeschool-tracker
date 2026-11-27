@@ -2,6 +2,7 @@
 // Chinese verse source: https://www.biblegateway.com/passage/?search=Micah%206%3A8&version=CUVS
 export const zh = {
   "Your Advent reading plan": "您的待降期阅读计划",
+  "Your winter reading plan": "您的冬季阅读计划",
   "These are reading targets, not completed progress. Continue at your own pace.": "以下是阅读目标，并非已完成的进度，请按自己的节奏继续。",
   "See the full reading schedule": "查看完整阅读安排",
   "Little Women · chapters {range}": "《小妇人》· 第 {range} 章",
