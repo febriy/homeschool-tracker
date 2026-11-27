@@ -10,9 +10,6 @@ export const educationWeeks=[
  {start:'2026-12-13',end:'2026-12-19',phase:'Advent week 3',littleWomen:'39–42',narnia:'10–13',devotional:'15–21',biography:'45%',art:'Gari Melchers · The Nativity',hymn:'Wake, Awake, for Night Is Flying'},
  {start:'2026-12-20',end:'2026-12-26',phase:'Advent week 4',littleWomen:'43–45',narnia:'14–17',devotional:'22–28',biography:'50%',art:'Caspar David Friedrich · Winter Landscape',hymn:'Of the Father’s Love Begotten'},
  {start:'2026-12-27',end:'2027-01-02',phase:'The week after Advent',littleWomen:'46–47',biography:'60%'},
- {start:'2027-01-03',end:'2027-01-12',phase:'Into Little Men',littleMen:'1–7',biography:'Read alongside Little Men.'},
- {start:'2027-01-13',end:'2027-01-27',phase:'January reading',biography:'75%'},
- {start:'2027-01-28',end:'2027-02-23',phase:'February reading',biography:'Finish by 23 February.'}
 
  // A Mother's Education · Winter 2026. The source PDF remains private.
  {program:'winter',start:'2027-01-03',end:'2027-01-09',phase:'Winter · Week 1',littleMen:'1–3',polarNight:'',everlastingMeal:'1–2',marmeeLouisa:'1–2',art:'We Are Resting (1951)',challenge:'Set aside a small, candlelit reading time.'},
@@ -36,7 +33,6 @@ export const seasonalActivities={
  winter:[{id:'ame-winter-little-men',title:'Little Men',detail:'Follow this week’s reading target.',progress:true},{id:'ame-winter-polar-night',title:'A Woman in the Polar Night',detail:'Follow this week’s reading target.',progress:true},{id:'ame-winter-everlasting-meal',title:'An Everlasting Meal',detail:'Read the scheduled chapters as time allows.',progress:true},{id:'ame-winter-marmee-louisa',title:'Marmee & Louisa',detail:'Read the scheduled chapters as time allows.',progress:true}],
  other:[{id:'personal-cooking',title:'Cooking',detail:'Try one new family recipe each week. Record its title, source and what you would change.'},{id:'personal-commonplace',title:'Commonplace notebook',detail:'Keep a passage and a thought from your reading.'},{id:'personal-narration',title:'Narration journal',detail:'Retell a short reading in your own words.'},{id:'personal-nature',title:'Nature journal',detail:'Spend a little time outdoors and record an observation.'},{id:'personal-centuries',title:'Book of Centuries',detail:'Add a person, work or event that caught your attention.'},{id:'personal-handicraft',title:'Handicraft',detail:'Choose a craft to enjoy and practise.'}]
 };
-const chapters=range=>({detail:'Chapters {range}',detailValues:{range}});
 const chapters=range=>({detail:'Chapters {range}',detailValues:{range}});
 export function personalEducation(date,base){
  const week=educationWeeks.find(x=>date>=x.start&&date<=x.end);if(!week)return null;
